@@ -1,0 +1,67 @@
+/* ----- Base rápida ----- */
+:root{
+  --black:#000; --white:#fff;
+  --container: 1160px;
+}
+body{margin:0; background:#fff; color:#000; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;}
+/* Si tienes Rotonda Variable, descomenta y ajusta nombre archivo:
+@font-face{
+  font-family:"RotondaVar";
+  src:url("../media/fonts/Rotonda-Variable.woff2") format("woff2");
+  font-weight:100 900; font-style:normal; font-display:swap;
+}
+body{font-family:"RotondaVar", system-ui, -apple-system, Segoe UI, Roboto, Arial;}
+*/
+.container{width:90%; max-width:var(--container); margin-inline:auto;}
+
+/* ----- Header ----- */
+.site-header{position:sticky; top:0; background:var(--white); border-bottom:1px solid #e9e9e9; z-index:50;}
+.header-top{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0;}
+.logo img{height:36px; display:block;}
+
+.header-actions{display:flex; align-items:center; gap:16px;}
+.link-newsletter{display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#000; font-weight:600;}
+.link-newsletter .chevron{transform:translateY(1px) rotate(0deg); transition:transform .2s ease;}
+.link-newsletter:hover .chevron{transform:translateY(1px) rotate(180deg);}
+
+.btn-tickets{background:#000; color:#fff; padding:10px 14px; border-radius:6px; text-decoration:none; font-weight:700; display:inline-block}
+
+/* ----- Nav (fila inferior) ----- */
+.main-nav{border-top:1px solid #f0f0f0;}
+.menu{list-style:none; margin:0; padding:8px 0; display:flex; gap:28px; flex-wrap:wrap;}
+.menu a{text-decoration:none; color:#000; font-weight:600;}
+.menu a:hover{text-decoration:underline;}
+
+/* ----- Burger ----- */
+.burger{display:none; position:relative; width:36px; height:36px; border:1px solid #e5e5e5; background:transparent; border-radius:8px; cursor:pointer;}
+.burger .line{position:absolute; left:7px; right:7px; height:2px; background:#000; transition:transform .25s ease, opacity .2s ease;}
+.line-1{top:11px;}
+.line-2{top:17px;}
+.line-3{top:23px;}
+
+/* Estado abierto: convertir en X */
+.burger.is-open .line-1{transform:translateY(6px) rotate(45deg);}
+.burger.is-open .line-2{opacity:0;}
+.burger.is-open .line-3{transform:translateY(-6px) rotate(-45deg);}
+
+/* ----- Responsive ----- */
+@media (max-width: 900px){
+  /* En móvil, el menú se oculta y se despliega */
+  .burger{display:inline-block;}
+  .main-nav{border-top:none;}
+  .menu{display:block; padding:0; margin:0;}
+  .menu li{border-top:1px solid #f0f0f0;}
+  .menu a{display:block; padding:14px 0;}
+
+  /* Contenedor del nav colapsado */
+  #main-menu{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+  }
+  #main-menu.menu-open{max-height:300px;} /* valor suficiente para las opciones */
+
+  /* En móvil quitamos la línea separadora superior del nav en la cabecera */
+  .site-header .header-top{padding:12px 0;}
+  .site-header .main-nav{border-top:1px solid #f0f0f0;}
+}

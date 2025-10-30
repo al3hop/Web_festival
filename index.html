@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANIMAYO — Festival Internacional de Animación</title>
+  <meta name="description" content="Festival internacional de cine de animación, VFX y videojuegos. Fechas, sedes, programa, inscripción y venta de entradas." />
+  <link rel="preload" href="/assets/fonts/YourFont-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+<body>
+    <!-- HEADER / NAV -->
+<header class="site-header">
+  <div class="container header-top">
+    <!-- Logo -->
+    <a class="logo" href="#">
+      <!-- Sustituye por tu SVG del logo de Animayo -->
+      <img src="media/img/logo-animayo.svg" alt="Animayo">
+    </a>
+
+    <!-- Acciones a la derecha -->
+    <div class="header-actions">
+      <a href="#newsletter" class="link-newsletter">
+        Newsletter
+        <!-- Flecha simple en SVG (chevron) -->
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </a>
+
+      <a href="#tickets" class="btn-tickets">Tickets</a>
+
+      <!-- Botón hamburguesa (solo visible en móvil) -->
+      <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Fila inferior: navegación principal -->
+  <nav id="main-menu" class="main-nav" aria-label="Principal">
+    <ul class="menu">
+      <li><a href="#animayo-2026">Animayo 2026</a></li>
+      <li><a href="#informacion">Información</a></li>
+      <li><a href="#que-es">¿Qué es Animayo?</a></li>
+      <li><a href="#anteriores">Festivales Anteriores</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+
+
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" data-elevate>
+    <div class="container header-inner">
+      <a class="logo" href="#" aria-label="Inicio Animayo">
+        <svg width="28" height="28" aria-hidden="true"><circle cx="14" cy="14" r="12"/></svg>
+        <span>Animayo</span>
+      </a>
+
+      <button class="nav-toggle" aria-controls="nav" aria-expanded="false" aria-label="Abrir menú">
+        <span class="bars" aria-hidden="true"></span>
+      </button>
+
+      <nav id="nav" class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="#programa">Programa</a></li>
+          <li><a href="#sedes">Sedes</a></li>
+          <li><a href="#entradas">Entradas</a></li>
+          <li><a href="#talleres">Talleres</a></li>
+          <li><button class="btn btn--ghost" data-modal-target="#modal-newsletter">Newsletter</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- HERO -->
+    <section class="hero" aria-label="Portada">
+      <div class="container hero-inner">
+        <h1 class="hero__title">Festival Internacional de Animación, VFX y Videojuegos</h1>
+        <p class="hero__meta">Las Palmas de G.C. · 6–10 mayo 2026 · Edición 20</p>
+        <div class="hero__cta">
+          <a class="btn" href="#entradas">Comprar entradas</a>
+          <a class="btn btn--ghost" href="#programa">Ver programa</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMA / GRID -->
+    <section id="programa" class="section" aria-labelledby="tit-programa">
+      <div class="container">
+        <div class="section__head">
+          <h2 id="tit-programa">Programa</h2>
+          <div class="filters" role="group" aria-label="Filtrar programa">
+            <button class="chip is-active" data-filter="all">Todo</button>
+            <button class="chip" data-filter="proyecciones">Proyecciones</button>
+            <button class="chip" data-filter="talleres">Talleres</button>
+            <button class="chip" data-filter="charlas">Charlas</button>
+          </div>
+        </div>
+
+        <div class="grid program-grid" data-grid>
+          <!-- Item ejemplo -->
+          <article class="card" data-category="proyecciones">
+            <img src="assets/img/placeholder-1.jpg" alt="Frame película X" loading="lazy" />
+            <div class="card__body">
+              <h3 class="card__title">Selección Oficial — Cortos I</h3>
+              <p class="card__meta">Lun 6 · 18:00 · Teatro Guiniguada</p>
+              <button class="btn btn--small" data-modal-target="#modal-sesion">Más info</button>
+            </div>
+          </article>
+          <!-- Duplicar cards y ajustar data-category según Figma -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PRECIOS / PRICING -->
+    <section id="entradas" class="section section--alt" aria-labelledby="tit-precios">
+      <div class="container">
+        <h2 id="tit-precios">Entradas</h2>
+
+        <div class="tabs" role="tablist" aria-label="Tipos de abono">
+          <button role="tab" aria-selected="true" aria-controls="panel-general" id="tab-general">General</button>
+          <button role="tab" aria-selected="false" aria-controls="panel-estudiante" id="tab-estudiante">Estudiante</button>
+          <button role="tab" aria-selected="false" aria-controls="panel-pro" id="tab-pro">Pro</button>
+        </div>
+
+        <div id="panel-general" class="tabpanel is-active" role="tabpanel" tabindex="0" aria-labelledby="tab-general">
+          <div class="pricing">
+            <article class="price-card">
+              <h3>Básico</h3>
+              <p class="price"><span data-price>35</span>€</p>
+              <ul>
+                <li>Acceso a 3 proyecciones</li>
+                <li>1 charla</li>
+              </ul>
+              <a class="btn" href="#compra">Comprar</a>
+            </article>
+            <article class="price-card is-featured">
+              <h3>Full Pass</h3>
+              <p class="price"><span data-price>95</span>€</p>
+              <ul>
+                <li>Acceso completo 5 días</li>
+                <li>Reserva prioritaria</li>
+              </ul>
+              <a class="btn" href="#compra">Comprar</a>
+            </article>
+          </div>
+        </div>
+
+        <div id="panel-estudiante" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-estudiante" hidden>
+          <!-- Contenido alternativo -->
+          <p class="muted">Descuentos disponibles con acreditación.</p>
+        </div>
+        <div id="panel-pro" class="tabpanel" role="tabpanel" tabindex="0" aria-labelledby="tab-pro" hidden>
+          <!-- Contenido alternativo -->
+          <p class="muted">Incluye actividades de networking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO / VALIDACIÓN JS -->
+    <section id="talleres" class="section" aria-labelledby="tit-form">
+      <div class="container">
+        <h2 id="tit-form">Inscripción a talleres</h2>
+        <form id="form-inscripcion" novalidate>
+          <div class="form-grid">
+            <label>Nombre
+              <input required name="nombre" autocomplete="name" />
+              <span class="error" aria-live="polite"></span>
+            </label>
+            <label>Email
+              <input required type="email" name="email" autocomplete="email" />
+              <span class="error" aria-live="polite"></span>
+            </label>
+            <label>Selecciona taller
+              <select required name="taller">
+                <option value="">— Elige uno —</option>
+                <option>Storyboard express</option>
+                <option>Rigging básico</option>
+                <option>Motion con C4D</option>
+              </select>
+              <span class="error" aria-live="polite"></span>
+            </label>
+            <label>Comentarios
+              <textarea name="comentarios" rows="4" maxlength="500"></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="rgpd" required />
+              <span>Acepto la <a href="#" target="_blank" rel="noopener">política de privacidad</a></span>
+              <span class="error" aria-live="polite"></span>
+            </label>
+          </div>
+          <button class="btn" type="submit">Enviar inscripción</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- MODALES -->
+    <div id="modal-newsletter" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-newsletter-title" hidden>
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__dialog" role="document">
+        <button class="modal__close" aria-label="Cerrar" data-close>×</button>
+        <h3 id="modal-newsletter-title">Suscríbete a la newsletter</h3>
+        <form id="form-newsletter" novalidate>
+          <label>Email
+            <input required type="email" name="email" />
+            <span class="error" aria-live="polite"></span>
+          </label>
+          <button class="btn" type="submit">Suscribirme</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-sesion" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-sesion-title" hidden>
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__dialog" role="document">
+        <button class="modal__close" aria-label="Cerrar" data-close>×</button>
+        <h3 id="modal-sesion-title">Selección Oficial — Cortos I</h3>
+        <p>Descripción breve de la sesión, duración, directores invitados y Q&A posterior.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Animayo (Rediseño académico). Hecho por <a href="#">Tu Nombre</a>.</p>
+      <ul class="social">
+        <li><a href="#" aria-label="Instagram">IG</a></li>
+        <li><a href="#" aria-label="X/Twitter">X</a></li>
+        <li><a href="#" aria-label="YouTube">YT</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="JS/script.js" defer></script>
+</body>
+</html>
+```
+
