@@ -200,3 +200,223 @@ body{font-family:"RotondaVar", system-ui, -apple-system, Segoe UI, Roboto, Arial
   object-fit: cover;    /* recorta para llenar el ancho */
   display: block;
 }
+
+
+
+
+/* parte de texto e imagen */
+
+
+/* ===== Sección Entradas ===== */
+.section-entradas{
+  padding: clamp(32px, 6vw, 72px) 0;
+  background:#fff;
+}
+
+/* Logo + año */
+.marca-ano{
+  display:flex;
+  justify-content:center;
+  margin-bottom: clamp(16px, 4vw, 32px);
+}
+.svg-animayo-2026{
+  width:min(640px, 95%);
+  height:auto;
+}
+
+/* Grid 2 columnas */
+.entradas-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 4vw, 40px);
+  align-items: start;
+}
+
+/* Tarjeta de texto (col izquierda) */
+.entradas-card{
+  border-radius:8px;
+  padding: clamp(16px, 3.5vw, 28px);
+  background:#fff;
+}
+
+.entradas-card h2{
+  margin:0 0 12px;
+  font-size: clamp(22px, 3.2vw, 36px);
+  line-height:1.1;
+  letter-spacing: .02em;
+}
+
+.entradas-card p{
+  margin:0 0 16px;
+  max-width: 60ch;
+}
+
+.entradas-card h3{
+  margin: 20px 0 8px;
+  font-size: clamp(16px, 2.2vw, 20px);
+}
+
+.horarios{
+  margin: 0 0 20px 1.2em;
+  padding:0;
+}
+
+/* Botón CTA (hover: invierte a negro con texto blanco) */
+.btn-cta-entradas{
+  display:inline-block;
+  padding:12px 22px;
+  border:2px solid #000;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  color:#000;
+  transition: background .2s ease, color .2s ease, transform .06s ease;
+}
+.btn-cta-entradas:hover{
+  background:#000;
+  color:#fff;
+}
+.btn-cta-entradas:active{
+  transform: translateY(1px);
+}
+
+/* Nota pequeña */
+.nota{
+  margin-top: 18px;
+  font-size: .9rem;
+  color:#555;
+  font-style: italic;
+}
+
+/* Columna imagen (derecha) */
+.entradas-media{
+  margin:0;
+  border-radius:8px;
+  overflow:hidden;
+  background:#f7f7f7;
+}
+.entradas-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio: 16 / 10;      /* parecido al mock, algo "aplastado" */
+  object-fit: cover;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px){
+  .entradas-grid{
+    grid-template-columns: 1fr;   /* apila en móvil */
+  }
+  .entradas-media{
+    order:-1;                      /* imagen arriba, como en muchos mocks */
+    margin-bottom: 8px;
+  }
+  .svg-animayo-2026{ width: 86%; }
+}
+
+
+/* zona de bloques */
+
+:root{
+  --maxw: 1200px;
+  --gap: 0;                 /* todo conectado */
+  --tile-min: 240px;        /* altura mínima tiles en móvil */
+  --tile-max: 420px;        /* altura máxima tiles en desktop */
+}
+
+/* Contenedor general */
+.info{
+  width: min(95vw, var(--maxw));
+  margin: 40px auto 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color: #111;
+}
+
+/* Cabecera con línea a la derecha */
+.info__header{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.info__header h2{
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+}
+.info__rule{
+  height: 2px;
+  background: #111;
+  flex: 1;
+  translate: 0 0; /* asegura nitidez */
+}
+
+/* GRID 2x3 sin espacios */
+.info__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  border: 1px solid transparent; /* evita colapso visual en algunos navegadores */
+}
+
+/* Tiles base (mismo alto para imagen y texto) */
+.tile{
+  min-height: clamp(var(--tile-min), 28vw, var(--tile-max));
+  display: grid;
+  align-content: center;
+}
+
+/* IMÁGENES */
+.tile--image{ overflow: hidden; }
+.tile--image img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* PANELES NEGROS DE TEXTO */
+.tile--text{
+  background: #000;
+  color: #fff;
+  padding: clamp(18px, 3vw, 36px);
+}
+.tile--text h3{
+  font-size: clamp(22px, 3.5vw, 40px);
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+.tile__divider{
+  height: 2px;
+  width: clamp(140px, 60%, 520px); /* línea blanca bajo el título */
+  background: #fff;
+  opacity: 0.9;
+  margin: 12px 0 16px;
+}
+.tile__meta{
+  font-size: clamp(14px, 1.6vw, 20px);
+  color: #ddd;
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .info{
+    width: 100%;
+  }
+  .info__grid{
+    grid-template-columns: 1fr;   /* 1 columna */
+  }
+  .tile{
+    min-height: 48vw;             /* mantiene proporción visual */
+  }
+}
+
+@media (max-width: 560px){
+  :root{ --tile-min: 200px; }
+  .tile{
+    min-height: 56vw;
+  }
+}
