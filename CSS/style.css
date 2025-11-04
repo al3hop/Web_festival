@@ -318,105 +318,331 @@ body{font-family:"RotondaVar", system-ui, -apple-system, Segoe UI, Roboto, Arial
 
 /* zona de bloques */
 
+
+
+
+
+
+
+/* ---------- RESET (overflow seguro) ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+html, body { overflow-x: hidden; }
+
+/* ---------- VARIABLES ---------- */
 :root{
-  --maxw: 1200px;
-  --gap: 0;                 /* todo conectado */
-  --tile-min: 240px;        /* altura mínima tiles en móvil */
-  --tile-max: 420px;        /* altura máxima tiles en desktop */
+  --ratio: 590/204;                 /* ≈ 2.892:1 */
+  --container-max: 1200px;
+  --container-pad: clamp(16px, 5vw, 28px);
+  --tile-min: 190px;
+  --tile-max: 280px;
+  --tile-pad: clamp(16px, 2.2vw, 28px);
+  --line-w: 88%;
 }
 
-/* Contenedor general */
+/* ---------- CONTENEDOR ---------- */
 .info{
-  width: min(95vw, var(--maxw));
-  margin: 40px auto 0;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  margin-block: 36px 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
   color: #111;
 }
 
-/* Cabecera con línea a la derecha */
-.info__header{
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 18px;
-}
-.info__header h2{
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
-  line-height: 1.1;
-  margin: 0;
-}
-.info__rule{
-  height: 2px;
-  background: #111;
-  flex: 1;
-  translate: 0 0; /* asegura nitidez */
-}
+/* Cabecera */
+.info__header{ display:flex; align-items:center; gap:20px; margin-bottom:14px; }
+.info__header h2{ margin:0; font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.1; }
+.info__rule{ height:2px; background:#111; flex:1; }
 
-/* GRID 2x3 sin espacios */
-.info__grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap);
-  border: 1px solid transparent; /* evita colapso visual en algunos navegadores */
+/* ---------- GRID 2x3 ---------- */
+.info__row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;                           /* bloques pegados */
+  align-items:stretch;             /* misma altura */
+  max-width:100%;
 }
+.info__row > *{ min-width:0; }
+.info figure{ margin:0; }
 
-/* Tiles base (mismo alto para imagen y texto) */
+/* ---------- TILES ---------- */
 .tile{
-  min-height: clamp(var(--tile-min), 28vw, var(--tile-max));
-  display: grid;
-  align-content: center;
+  width:100%;
+  aspect-ratio:var(--ratio);
+  height:clamp(var(--tile-min), 28vw, var(--tile-max));
+  min-height:var(--tile-min);
+  max-height:var(--tile-max);
+  display:grid;
+  margin:0;
 }
+.tile--image{ overflow:hidden; aspect-ratio:var(--ratio); }
+.tile--image img{ width:100%; height:100%; object-fit:cover; object-position:center; }
 
-/* IMÁGENES */
-.tile--image{ overflow: hidden; }
-.tile--image img{
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
+.tile--text{ background:#000; color:#fff; position:relative; }
+.tile__content{
+  height:100%; padding:var(--tile-pad);
+  display:grid; align-content:center; gap:clamp(8px,1.4vw,14px);
+  width:min(92%, 680px);           /* la línea no toca bordes */
 }
+.tile__divider{ height:2px; width:var(--line-w); background:#fff; opacity:.9; }
+.tile__meta{ margin:0; color:#e6e6e6; font-size:clamp(13px,1.6vw,18px); }
+.tile--text h3{ margin:0; font-weight:800; font-size:clamp(20px,3.2vw,36px); line-height:1.1; }
 
-/* PANELES NEGROS DE TEXTO */
-.tile--text{
-  background: #000;
-  color: #fff;
-  padding: clamp(18px, 3vw, 36px);
-}
-.tile--text h3{
-  font-size: clamp(22px, 3.5vw, 40px);
-  font-weight: 700;
-  margin: 0 0 16px 0;
-}
-.tile__divider{
-  height: 2px;
-  width: clamp(140px, 60%, 520px); /* línea blanca bajo el título */
-  background: #fff;
-  opacity: 0.9;
-  margin: 12px 0 16px;
-}
-.tile__meta{
-  font-size: clamp(14px, 1.6vw, 20px);
-  color: #ddd;
-  margin: 0;
-}
-
-/* RESPONSIVE */
+/* ---------- MOBILE/TABLET ---------- */
 @media (max-width: 900px){
   .info{
-    width: 100%;
+    padding-left:clamp(20px,6vw,28px);
+    padding-right:clamp(20px,6vw,28px);
+    overflow-x:clip;
   }
-  .info__grid{
-    grid-template-columns: 1fr;   /* 1 columna */
+
+  /* pareja texto+imagen apilada y sin rendijas */
+  .info__row{ grid-template-columns:1fr; gap:0; overflow-x:clip; }
+  .info__row .tile--text{ order:1; }
+  .info__row .tile--image{ order:2; }
+  .info__row .tile{ height:clamp(210px,56vw,320px); max-height:none; overflow-x:clip; margin:0; }
+
+  /* separación uniforme entre filas */
+  .info__row + .info__row{ margin-top:clamp(20px,5vw,32px); }
+
+  .tile__content{ margin:0 auto; width:min(94%,700px); text-align:left; }
+  .tile__divider{ width:92%; }
+}
+
+/* ---------- DESKTOP (>=901px) ---------- */
+@media (min-width: 901px){
+  .info{ padding-left:clamp(24px,4vw,56px); padding-right:clamp(24px,4vw,56px); }
+
+  /* si quieres aire entre imagen y panel, cambia a: clamp(16px, 2.2vw, 28px) */
+  .info__row{ column-gap:0; }
+
+  /* alineaciones específicas */
+  .tile--text.left-desktop  .tile__content{ margin-left:0;  margin-right:auto; text-align:left; }
+  .tile--text.right-desktop .tile__content{ margin-right:0; margin-left:auto;  text-align:right; }
+  .tile--text.left-desktop  .tile__divider{ margin-right:auto; }
+  .tile--text.right-desktop .tile__divider{ margin-left:auto; }
+}
+
+
+
+
+
+/* Zona de párrafo e imagen */
+
+/* ====== About / ¿Qué es Animayo? ====== */
+:root{
+  --about-max: 1200px;
+  --about-pad: clamp(16px, 5vw, 28px);
+}
+
+.about{
+  width: 100%;
+  max-width: var(--about-max);
+  margin-inline: auto;
+  padding-inline: var(--about-pad);
+  margin-block: clamp(32px, 6vw, 64px);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color: #111;
+}
+
+.about__wrap{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr; /* texto un pelín más ancho */
+  gap: clamp(20px, 4vw, 40px);
+  align-items: start;
+}
+
+.about__text h2{
+  margin: 0 0 .5rem 0;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: clamp(28px, 5vw, 56px);
+  line-height: 1.05;
+}
+
+.about__text p{
+  margin: 0 0 1rem 0;
+  font-size: clamp(15px, 2.1vw, 19px);
+  line-height: 1.45;
+  max-width: 62ch;
+}
+
+.about__media{
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 16/10;        /* parecido a tu referencia; se adapta */
+  overflow: hidden;
+  border-radius: 6px;         /* quítalo si no quieres radio */
+}
+.about__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;    /* mueve el foco si lo necesitas */
+}
+
+/* ------ Responsive ------ */
+@media (max-width: 900px){
+  .about__wrap{
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 4vw, 24px);
   }
-  .tile{
-    min-height: 48vw;             /* mantiene proporción visual */
+  .about{
+    padding-inline: clamp(20px, 6vw, 28px);
+  }
+  .about__text p{ max-width: 68ch; }
+  .about__media{ aspect-ratio: 16/10; } /* mantiene proporción en móvil */
+}
+
+
+
+
+
+
+
+/* zona carteles que se desplazan */
+
+
+/* ====== FESTIVALES ANTERIORES ====== */
+:root{
+  --pf-max: 1200px;
+  --pf-pad: clamp(8px, 3vw, 16px);            /* padding lateral de la sección */
+  --poster-w: clamp(160px, 18vw, 260px);      /* ancho de cada cartel */
+  --poster-r: 16px;                           /* borde redondeado */
+  --gap: clamp(12px, 2vw, 24px);              /* separación entre carteles */
+  --speed: 38s;                               /* velocidad del scroll */
+  --fade: clamp(24px, 6vw, 80px);             /* ancho del desvanecido lateral */
+}
+
+.past-fests{
+  width: 100%;
+  margin-block: clamp(32px, 6vw, 80px);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color: #111;
+}
+
+.past-fests__inner{
+  max-width: var(--pf-max);
+  margin-inline: auto;
+  padding-inline: var(--pf-pad);
+}
+
+.past-fests h2{
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: clamp(28px, 5vw, 56px);
+  margin: 0 0 clamp(18px, 3.5vw, 28px);
+}
+
+/* --- Cinta --- */
+.marquee{
+  position: relative;
+  overflow: hidden;
+
+  /* acercamos la cinta a los bordes comiéndonos el padding del contenedor */
+  margin-inline: calc(-1 * var(--pf-pad));
+
+  /* desvanecido lateral a izquierda y derecha */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%
+  );
+}
+
+.marquee__track{
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  padding-block: clamp(6px, 1vw, 10px);
+  animation: marquee var(--speed) linear infinite;
+  will-change: transform;
+}
+
+/* Pausa al pasar el ratón */
+.marquee:hover .marquee__track{ animation-play-state: paused; }
+
+/* Carteles */
+.poster{
+  flex: 0 0 auto;
+  width: var(--poster-w);
+  aspect-ratio: 3 / 4;          /* ajusta si tus pósters tienen otra proporción */
+  border-radius: var(--poster-r);
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+}
+.poster img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Animación infinita (duplica la lista para bucle perfecto) */
+@keyframes marquee{
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
+}
+
+/* Accesibilidad: reducir movimiento si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .marquee__track{ animation: none; }
+}
+
+/* --- Responsive móvil: full-bleed de borde a borde --- */
+@media (max-width: 900px){
+  .past-fests__inner{ padding-inline: 0; }
+  .marquee{ margin-inline: 0; } /* cinta ocupa todo el ancho */
+}
+
+
+/* ===== Desktop: cinta a TODO el ancho del viewport + fade bilateral ===== */
+@media (min-width: 901px){
+  .past-fests .marquee{
+    /* full-bleed real, ignorando paddings y max-width del contenedor */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    /* desvanecido en ambos laterales */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent var(--fade),
+      #000 calc(var(--fade) + 1px),
+      #000 calc(100% - var(--fade) - 1px),
+      transparent 100%
+    );
+            mask-image: linear-gradient(
+      to right,
+      transparent var(--fade),
+      #000 calc(var(--fade) + 1px),
+      #000 calc(100% - var(--fade) - 1px),
+      transparent 100%
+    );
   }
 }
 
-@media (max-width: 560px){
-  :root{ --tile-min: 200px; }
-  .tile{
-    min-height: 56vw;
+/* ===== Mobile/tablet: full-bleed simple (borde a borde) ===== */
+@media (max-width: 900px){
+  .past-fests__inner{ padding-inline: 0; }
+  .past-fests .marquee{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
