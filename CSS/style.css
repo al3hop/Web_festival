@@ -1,80 +1,297 @@
-/* ----- Base rápida ----- */
+/* =======================
+   RESET + VARIABLES
+   ======================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { margin: 0; overflow-x: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+
 :root{
-  --black:#000;
-  --white:#fff;
-  --container: 1160px;
+  /* Base */
+  --black: #000;
+  --white: #fff;
+  --font: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+
+  /* Contenedor global */
+  --container-max: 1160px;
+  --container-pad: clamp(16px, 5vw, 28px);
+
+  /* Hero video */
+  --hero-ratio: 16/6;
+
+  /* Sección Entradas */
+  --entradas-gap: clamp(20px, 4vw, 40px);
+
+  /* Sección Info (bloques negro/imagen) */
+  --info-ratio: 590/204; /* ≈2.892:1 */
+  --info-tile-min: 190px;
+  --info-tile-max: 280px;
+  --info-pad: clamp(16px, 2.2vw, 28px);
+  --info-line: 88%;
+
+  /* About */
+  --about-max: 1200px;
+  --about-pad: clamp(16px, 5vw, 28px);
+
+  /* Festivales anteriores */
+  --pf-max: 1200px;
+  --pf-pad: clamp(8px, 3vw, 16px);
+  --poster-w: clamp(160px, 18vw, 260px);
+  --poster-r: 16px;
+  --poster-gap: clamp(12px, 2vw, 24px);
+  --marquee-speed: 38s;
+  --fade: clamp(24px, 6vw, 80px);
+
+  /* Breakpoint */
+  --bp: 900px;
 }
 
-body{
-  margin:0;
-  background:#fff; /* fondo blanco, como quieres */
-  color:#000;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-}
-
-/* Si tienes Rotonda Variable, descomenta y ajusta nombre archivo:
-@font-face{
-  font-family:"RotondaVar";
-  src:url("../media/fonts/Rotonda-Variable.woff2") format("woff2");
-  font-weight:100 900; font-style:normal; font-display:swap;
-}
-body{font-family:"RotondaVar", system-ui, -apple-system, Segoe UI, Roboto, Arial;}
-*/
+/* =======================
+   BASE / CONTAINER
+   ======================= */
+body{ background: var(--white); color: var(--black); font-family: var(--font); }
 
 .container{
-  width:90%;
-  max-width:var(--container);
-  margin-inline:auto;
-  padding-inline:16px; /* margen lateral como en tu referencia */
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
 }
 
-/* ----- Header ----- */
+/* =======================
+   HEADER + NAV
+   ======================= */
 .site-header{
-  position:sticky;
-  top:0;
-  background:var(--white);
-  z-index:50;
-  /* Quitamos la línea gris */
-  border-bottom:none;
+  position: sticky; top: 0; z-index: 50;
+  background: var(--white);
+  border-bottom: none;
 }
-
 .header-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:12px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 12px 0;
+}
+.logo img{ height: 36px; }
+
+.header-actions{ display: flex; align-items: center; gap: 16px; }
+.link-newsletter{ display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--black); font-weight: 600; }
+.link-newsletter .chevron{ transform: translateY(1px); transition: transform .2s; }
+.link-newsletter:hover .chevron{ transform: translateY(1px) rotate(180deg); }
+
+.btn-tickets{
+  background: var(--black); color: var(--white);
+  padding: 10px 14px; border-radius: 6px; text-decoration: none; font-weight: 700;
 }
 
-.logo img{
-  height:36px;
-  display:block;
+/* Nav */
+.main-nav{ border-top: none; }
+.menu{ list-style: none; margin: 0; padding: 8px 0; display: flex; gap: 28px; flex-wrap: wrap; }
+.menu a{ text-decoration: none; color: var(--black); font-weight: 600; }
+.menu a:hover{ text-decoration: underline; }
+
+/* Burger */
+.burger{
+  display: none; position: relative; width: 36px; height: 36px;
+  border: 1px solid #e5e5e5; background: transparent; border-radius: 8px; cursor: pointer;
+}
+.burger .line{ position: absolute; left: 7px; right: 7px; height: 2px; background: var(--black); transition: transform .25s, opacity .2s; }
+.line-1{ top: 11px; } .line-2{ top: 17px; } .line-3{ top: 23px; }
+.burger.is-open .line-1{ transform: translateY(6px) rotate(45deg); }
+.burger.is-open .line-2{ opacity: 0; }
+.burger.is-open .line-3{ transform: translateY(-6px) rotate(-45deg); }
+
+/* Responsive header/nav */
+@media (max-width: var(--bp)){
+  .burger{ display: inline-block; }
+  .main-nav{
+    position: fixed; inset: 0; background: var(--white);
+    display: none; justify-content: center; align-items: center; text-align: center; z-index: 40;
+  }
+  .main-nav.menu-open{ display: flex; }
+  .menu{ flex-direction: column; gap: 24px; padding: 0; margin: 0; }
+  .menu a{ font-size: 1.5rem; font-weight: 700; }
+  .site-header .header-top{ padding: 12px 0; }
 }
 
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:16px;
+/* =======================
+   HERO VIDEO
+   ======================= */
+.hero-video{ position: relative; width: 100%; overflow: hidden; background: #000; }
+.video-bg{
+  width: 100%; height: auto; display: block;
+  aspect-ratio: var(--hero-ratio); object-fit: cover;
 }
 
-.link-newsletter{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  text-decoration:none;
-  color:#000;
-  font-weight:600;
+/* =======================
+   SECCIÓN ENTRADAS (texto + imagen)
+   ======================= */
+.section-entradas{ padding-block: clamp(32px, 6vw, 72px); background: var(--white); }
+
+.marca-ano{ display: flex; justify-content: center; margin-bottom: clamp(16px, 4vw, 32px); }
+.svg-animayo-2026{ width: min(640px, 95%); height: auto; }
+
+.entradas-grid{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--entradas-gap); align-items: start;
 }
 
-.link-newsletter .chevron{
-  transform:translateY(1px) rotate(0deg);
-  transition:transform .2s ease;
+.entradas-card{ background: var(--white); border-radius: 8px; padding: clamp(16px, 3.5vw, 28px); }
+.entradas-card h2{ margin: 0 0 12px; font-size: clamp(22px, 3.2vw, 36px); line-height: 1.1; letter-spacing: .02em; }
+.entradas-card p{ margin: 0 0 16px; max-width: 60ch; }
+.entradas-card h3{ margin: 20px 0 8px; font-size: clamp(16px, 2.2vw, 20px); }
+.horarios{ margin: 0 0 20px 1.2em; padding: 0; }
+
+.btn-cta-entradas{
+  display: inline-block; padding: 12px 22px; border: 2px solid var(--black);
+  border-radius: 999px; font-weight: 700; text-decoration: none; color: var(--black);
+  transition: background .2s, color .2s, transform .06s;
+}
+.btn-cta-entradas:hover{ background: var(--black); color: var(--white); }
+.btn-cta-entradas:active{ transform: translateY(1px); }
+
+.nota{ margin-top: 18px; font-size: .9rem; color: #555; font-style: italic; }
+
+.entradas-media{ margin: 0; border-radius: 8px; overflow: hidden; background: #f7f7f7; }
+.entradas-media img{ width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; }
+
+@media (max-width: var(--bp)){
+  .entradas-grid{ grid-template-columns: 1fr; }
+  .entradas-media{ order: -1; margin-bottom: 8px; }
+  .svg-animayo-2026{ width: 86%; }
 }
 
-.link-newsletter:hover .chevron{
-  transform:translateY(1px) rotate(180deg);
+/* =======================
+   SECCIÓN INFO (bloques negro/imagen)
+   ======================= */
+.info{
+  width: 100%; max-width: 1200px; margin-inline: auto;
+  padding-inline: clamp(16px, 5vw, 28px);
+  margin-block: 36px 0; color: var(--black); font-family: var(--font);
+}
+.info__header{ display: flex; align-items: center; gap: 20px; margin-bottom: 14px; }
+.info__header h2{ margin: 0; font-weight: 800; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
+.info__rule{ height: 2px; background: var(--black); flex: 1; }
+
+.info__row{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; max-width: 100%;
+}
+.info__row > *{ min-width: 0; }
+.info figure{ margin: 0; }
+
+.tile{
+  width: 100%; aspect-ratio: var(--info-ratio);
+  height: clamp(var(--info-tile-min), 28vw, var(--info-tile-max));
+  min-height: var(--info-tile-min); max-height: var(--info-tile-max);
+  display: grid; margin: 0;
+}
+.tile--image{ overflow: hidden; aspect-ratio: var(--info-ratio); }
+.tile--image img{ width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.tile--text{ background: var(--black); color: var(--white); position: relative; }
+.tile__content{
+  height: 100%; padding: var(--info-pad);
+  display: grid; align-content: center; gap: clamp(8px, 1.4vw, 14px);
+  width: min(92%, 680px);
+}
+.tile__divider{ height: 2px; width: var(--info-line); background: var(--white); opacity: .9; }
+.tile__meta{ margin: 0; color: #e6e6e6; font-size: clamp(13px, 1.6vw, 18px); }
+.tile--text h3{ margin: 0; font-weight: 800; font-size: clamp(20px, 3.2vw, 36px); line-height: 1.1; }
+
+@media (max-width: var(--bp)){
+  .info{ padding-inline: clamp(20px, 6vw, 28px); overflow-x: clip; }
+  .info__row{ grid-template-columns: 1fr; gap: 0; overflow-x: clip; }
+  .info__row .tile--text{ order: 1; }
+  .info__row .tile--image{ order: 2; }
+  .info__row .tile{ height: clamp(210px, 56vw, 320px); max-height: none; overflow-x: clip; }
+  .info__row + .info__row{ margin-top: clamp(20px, 5vw, 32px); }
+  .tile__content{ margin: 0 auto; width: min(94%, 700px); text-align: left; }
+  .tile__divider{ width: 92%; }
 }
 
+/* Alineaciones específicas en desktop */
+@media (min-width: calc(var(--bp) + 1px)){
+  .info{ padding-inline: clamp(24px, 4vw, 56px); }
+  .info__row{ column-gap: 0; align-items: stretch; }
+  .tile--text.left-desktop  .tile__content{ margin-left: 0;  margin-right: auto; text-align: left; }
+  .tile--text.right-desktop .tile__content{ margin-right: 0; margin-left:  auto; text-align: right; }
+  .tile--text.left-desktop  .tile__divider{ margin-right: auto; }
+  .tile--text.right-desktop .tile__divider{ margin-left:  auto; }
+}
+
+/* =======================
+   ABOUT (¿Qué es Animayo?)
+   ======================= */
+.about{
+  width: 100%; max-width: var(--about-max); margin-inline: auto;
+  padding-inline: var(--about-pad);
+  margin-block: clamp(32px, 6vw, 64px);
+  font-family: var(--font); color: var(--black);
+}
+.about__wrap{ display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(20px, 4vw, 40px); align-items: start; }
+.about__text h2{ margin: 0 0 .5rem; font-weight: 900; letter-spacing: -0.02em; font-size: clamp(28px, 5vw, 56px); line-height: 1.05; }
+.about__text p{ margin: 0 0 1rem; font-size: clamp(15px, 2.1vw, 19px); line-height: 1.45; max-width: 62ch; }
+.about__media{ margin: 0; width: 100%; aspect-ratio: 16/10; overflow: hidden; border-radius: 6px; }
+.about__media img{ width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+@media (max-width: var(--bp)){
+  .about__wrap{ grid-template-columns: 1fr; gap: clamp(16px, 4vw, 24px); }
+  .about{ padding-inline: clamp(20px, 6vw, 28px); }
+  .about__text p{ max-width: 68ch; }
+}
+
+/* =======================
+   FESTIVALES ANTERIORES (carrusel infinito)
+   ======================= */
+.past-fests{ width: 100%; margin-block: clamp(32px, 6vw, 80px); font-family: var(--font); color: var(--black); }
+.past-fests__inner{ max-width: var(--pf-max); margin-inline: auto; padding-inline: var(--pf-pad); }
+.past-fests h2{ text-align: center; font-weight: 900; letter-spacing: -0.02em; font-size: clamp(28px, 5vw, 56px); margin: 0 0 clamp(18px, 3.5vw, 28px); }
+
+.marquee{
+  position: relative; overflow: hidden;
+  margin-inline: calc(-1 * var(--pf-pad)); /* se acerca a los bordes */
+  -webkit-mask-image: linear-gradient(to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%);
+          mask-image: linear-gradient(to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%);
+}
+.marquee__track{
+  display: flex; gap: var(--poster-gap); width: max-content;
+  padding-block: clamp(6px, 1vw, 10px);
+  animation: marquee var(--marquee-speed) linear infinite; will-change: transform;
+}
+.marquee:hover .marquee__track{ animation-play-state: paused; }
+
+.poster{
+  flex: 0 0 auto; width: var(--poster-w); aspect-ratio: 3/4;
+  border-radius: var(--poster-r); overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+}
+.poster img{ width: 100%; height: 100%; object-fit: cover; }
+
+@keyframes marquee{ from{ transform: translate3d(0,0,0); } to{ transform: translate3d(-50%,0,0); } }
+
+@media (prefers-reduced-motion: reduce){ .marquee__track{ animation: none; } }
+
+@media (max-width: var(--bp)){
+  .past-fests__inner{ padding-inline: 0; }
+  .marquee{ margin-inline: 0; }
+}
+@media (min-width: calc(var(--bp) + 1px)){
+  /* full-bleed real, pega a los bordes del viewport */
+  .past-fests .marquee{
+    width: 100vw; max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+/* Botón Tickets: estado base + animaciones */
 .btn-tickets{
   background:#000;
   color:#fff;
@@ -83,566 +300,408 @@ body{font-family:"RotondaVar", system-ui, -apple-system, Segoe UI, Roboto, Arial
   text-decoration:none;
   font-weight:700;
   display:inline-block;
+
+  /* para que no “salte” al poner borde en hover */
+  border:2px solid transparent;
+
+  /* animación suave */
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .06s ease;
 }
 
-/* ----- Nav (fila inferior) ----- */
-.main-nav{
-  /* sin líneas divisorias */
-  border-top:none;
-}
-
-.menu{
-  list-style:none;
-  margin:0;
-  padding:8px 0;
-  display:flex;
-  gap:28px;
-  flex-wrap:wrap;
-}
-
-.menu a{
-  text-decoration:none;
+/* Hover: blanco con borde negro y texto negro */
+.btn-tickets:hover{
+  background:#fff;
   color:#000;
-  font-weight:600;
+  border-color:#000;
 }
 
-.menu a:hover{
-  text-decoration:underline;
+/* feedback al click */
+.btn-tickets:active{
+  transform: translateY(1px);
 }
 
-/* ----- Burger ----- */
+
+
+/* =======================
+   TICKETS HOVER (override seguro)
+   ======================= */
+.btn-tickets{
+  background:#000;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-block;
+  border:2px solid transparent; /* evita “salto” al aparecer el borde */
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .06s ease;
+}
+.btn-tickets:hover{
+  background:#fff;
+  color:#000;
+  border-color:#000;
+}
+.btn-tickets:active{ transform: translateY(1px); }
+
+/* =======================
+   HAMBURGUESA + OVERLAY
+   ======================= */
 .burger{
   display:none;
   position:relative;
-  width:36px;
-  height:36px;
+  width:36px;height:36px;
   border:1px solid #e5e5e5;
   background:transparent;
   border-radius:8px;
   cursor:pointer;
 }
-
 .burger .line{
-  position:absolute;
-  left:7px;
-  right:7px;
-  height:2px;
-  background:#000;
+  position:absolute;left:7px;right:7px;height:2px;background:#000;
   transition:transform .25s ease, opacity .2s ease;
 }
-
 .line-1{ top:11px; }
 .line-2{ top:17px; }
 .line-3{ top:23px; }
-
-/* Estado abierto: convertir en X */
 .burger.is-open .line-1{ transform:translateY(6px) rotate(45deg); }
 .burger.is-open .line-2{ opacity:0; }
 .burger.is-open .line-3{ transform:translateY(-6px) rotate(-45deg); }
 
-/* ----- Responsive ----- */
+/* Overlay NAV con transición suave */
 @media (max-width: 900px){
-
+  /* Solo logo + burger visibles en la barra */
   .burger{ display:inline-block; }
+  .header-actions > *:not(.burger){ display:none !important; }
 
-  /* Panel de navegación a pantalla completa y centrado */
   .main-nav{
-    position:fixed;
-    inset:0;               /* top:0; right:0; bottom:0; left:0 */
-    background:#fff;       /* blanco puro, sin líneas */
-    display:none;          /* oculto por defecto */
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    z-index:40;            /* por debajo del header (50) pero encima del contenido */
+    position:fixed; inset:0; z-index:40;
+    display:flex; justify-content:center; align-items:center; text-align:center;
+    background:#fff;
+    opacity:0; visibility:hidden;
+    transition:opacity .25s ease, visibility .25s ease;
+  }
+  .main-nav.menu-open{ opacity:1; visibility:visible; }
+
+  .main-nav .container{ width:100%; max-width:none; padding-inline:0; } /* overlay limpio */
+  .menu{ flex-direction:column; gap:24px; padding:0; margin:0; }
+  .menu a{ font-size:1.5rem; font-weight:700; text-decoration:none; color:#000; }
+
+  /* bloquea el scroll del documento al abrir el menú */
+  body.no-scroll{ overflow:hidden; }
+}
+
+/* =======================
+   CABECERA: ocultar al bajar, mostrar al subir
+   ======================= */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:#fff;
+  transition: transform .28s ease; /* animación suave */
+}
+.site-header.is-hidden{
+  transform: translateY(-100%);
+}
+
+
+
+
+
+
+/* Hover Tickets ya OK */
+.btn-tickets{
+  background:#000;color:#fff;padding:10px 14px;border-radius:6px;
+  text-decoration:none;font-weight:700;display:inline-block;
+  border:2px solid transparent;
+  transition:background .25s ease,color .25s ease,border-color .25s ease,transform .06s ease;
+}
+.btn-tickets:hover{ background:#fff;color:#000;border-color:#000; }
+.btn-tickets:active{ transform:translateY(1px); }
+
+/* Header hide/show */
+.site-header{ position:sticky;top:0;z-index:50;background:#fff;transition:transform .24s ease; }
+.site-header.is-hidden{ transform:translateY(-100%); }
+
+/* Nav móvil */
+@media (max-width:900px){
+  .burger{ display:inline-block; }
+  .main-nav{
+    position:fixed;inset:0;background:#fff;display:none;
+    justify-content:center;align-items:center;text-align:center;z-index:40;
+  }
+  .main-nav.menu-open{ display:flex; }
+  .menu{ display:flex;flex-direction:column;gap:24px;margin:0;padding:0; }
+  .menu a{ font-size:1.5rem;font-weight:700; }
+}
+
+/* Body sin scroll cuando el menú está abierto */
+body.no-scroll{ overflow:hidden; }
+
+/* Burger -> X (ya lo tenías) */
+.burger{ position:relative;width:36px;height:36px;border:1px solid #e5e5e5;background:transparent;border-radius:8px;cursor:pointer; }
+.burger .line{ position:absolute;left:7px;right:7px;height:2px;background:#000;transition:transform .25s,opacity .2s; }
+.line-1{ top:11px; } .line-2{ top:17px; } .line-3{ top:23px; }
+.burger.is-open .line-1{ transform:translateY(6px) rotate(45deg); }
+.burger.is-open .line-2{ opacity:0; }
+.burger.is-open .line-3{ transform:translateY(-6px) rotate(-45deg); }
+
+
+
+/* ===== Botón hamburguesa (solo líneas, sin cuadrado) ===== */
+.burger{
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Las 3 líneas */
+.burger .line{
+  position: absolute;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background: #000;
+  transform: translateX(-50%);
+  transition: transform .25s ease, opacity .2s ease;
+}
+
+.burger .line-1 { top: 14px; }
+.burger .line-2 { top: 21px; }
+.burger .line-3 { top: 28px; }
+
+/* Animación a “X” cuando está abierto */
+.burger.is-open .line-1{
+  transform: translate(-50%, 7px) rotate(45deg);
+}
+.burger.is-open .line-2{
+  opacity: 0;
+}
+.burger.is-open .line-3{
+  transform: translate(-50%, -7px) rotate(-45deg);
+}
+
+/* ===== Menú móvil con slide desde arriba ===== */
+@media (max-width: 900px){
+  .main-nav{
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    display: flex;                 /* siempre flex; controlamos con transform */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 40;
+
+    /* Estado cerrado (fuera de pantalla, arriba) */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .32s ease, opacity .32s ease;
   }
 
+  /* Estado abierto */
   .main-nav.menu-open{
-    display:flex;          /* aparece centrado cuando se abre */
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
+
+  
 
   .menu{
-    display:flex;
-    flex-direction:column;
-    gap:24px;
-    padding:0;
-    margin:0;
-  }
-
-  .menu li{
-    border:none;           /* sin divisores grises */
+    flex-direction: column;
+    gap: 24px;
+    padding: 0;
+    margin: 0;
   }
 
   .menu a{
-    display:block;
-    padding:0;
-    font-size:1.5rem;      /* más grande en móvil */
-    font-weight:700;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
 
-  /* Header compacto en móvil */
-  .site-header .header-top{ padding:12px 0; }
-}
+  .site-header .header-top{ padding: 12px 0; }
 
-/* ===== Hero Video ===== */
-.hero-video {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-}
-
-/* Vídeo centrado y recortado (aspecto más aplastado) */
-.video-bg {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 6; /* más ancho y bajo que 16:9 */
-  object-fit: cover;    /* recorta para llenar el ancho */
-  display: block;
+  /* Bloquea el scroll del body cuando está abierto */
+  body.no-scroll{ overflow: hidden; }
 }
 
 
 
-
-/* parte de texto e imagen */
-
-
-/* ===== Sección Entradas ===== */
-.section-entradas{
-  padding: clamp(32px, 6vw, 72px) 0;
-  background:#fff;
-}
-
-/* Logo + año */
-.marca-ano{
-  display:flex;
-  justify-content:center;
-  margin-bottom: clamp(16px, 4vw, 32px);
-}
-.svg-animayo-2026{
-  width:min(640px, 95%);
-  height:auto;
-}
-
-/* Grid 2 columnas */
-.entradas-grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 4vw, 40px);
-  align-items: start;
-}
-
-/* Tarjeta de texto (col izquierda) */
-.entradas-card{
-  border-radius:8px;
-  padding: clamp(16px, 3.5vw, 28px);
-  background:#fff;
-}
-
-.entradas-card h2{
-  margin:0 0 12px;
-  font-size: clamp(22px, 3.2vw, 36px);
-  line-height:1.1;
-  letter-spacing: .02em;
-}
-
-.entradas-card p{
-  margin:0 0 16px;
-  max-width: 60ch;
-}
-
-.entradas-card h3{
-  margin: 20px 0 8px;
-  font-size: clamp(16px, 2.2vw, 20px);
-}
-
-.horarios{
-  margin: 0 0 20px 1.2em;
-  padding:0;
-}
-
-/* Botón CTA (hover: invierte a negro con texto blanco) */
-.btn-cta-entradas{
-  display:inline-block;
-  padding:12px 22px;
-  border:2px solid #000;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  color:#000;
-  transition: background .2s ease, color .2s ease, transform .06s ease;
-}
-.btn-cta-entradas:hover{
-  background:#000;
-  color:#fff;
-}
-.btn-cta-entradas:active{
-  transform: translateY(1px);
-}
-
-/* Nota pequeña */
-.nota{
-  margin-top: 18px;
-  font-size: .9rem;
-  color:#555;
-  font-style: italic;
-}
-
-/* Columna imagen (derecha) */
-.entradas-media{
-  margin:0;
-  border-radius:8px;
-  overflow:hidden;
-  background:#f7f7f7;
-}
-.entradas-media img{
-  display:block;
-  width:100%;
-  height:auto;
-  aspect-ratio: 16 / 10;      /* parecido al mock, algo "aplastado" */
-  object-fit: cover;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 900px){
-  .entradas-grid{
-    grid-template-columns: 1fr;   /* apila en móvil */
-  }
-  .entradas-media{
-    order:-1;                      /* imagen arriba, como en muchos mocks */
-    margin-bottom: 8px;
-  }
-  .svg-animayo-2026{ width: 86%; }
-}
-
-
-/* zona de bloques */
-
-
-
-
-
-
-
-/* ---------- RESET (overflow seguro) ---------- */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-img { max-width: 100%; height: auto; display: block; }
-html, body { overflow-x: hidden; }
-
-/* ---------- VARIABLES ---------- */
-:root{
-  --ratio: 590/204;                 /* ≈ 2.892:1 */
-  --container-max: 1200px;
-  --container-pad: clamp(16px, 5vw, 28px);
-  --tile-min: 190px;
-  --tile-max: 280px;
-  --tile-pad: clamp(16px, 2.2vw, 28px);
-  --line-w: 88%;
-}
-
-/* ---------- CONTENEDOR ---------- */
-.info{
-  width: 100%;
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--container-pad);
-  margin-block: 36px 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-  color: #111;
-}
-
-/* Cabecera */
-.info__header{ display:flex; align-items:center; gap:20px; margin-bottom:14px; }
-.info__header h2{ margin:0; font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.1; }
-.info__rule{ height:2px; background:#111; flex:1; }
-
-/* ---------- GRID 2x3 ---------- */
-.info__row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;                           /* bloques pegados */
-  align-items:stretch;             /* misma altura */
-  max-width:100%;
-}
-.info__row > *{ min-width:0; }
-.info figure{ margin:0; }
-
-/* ---------- TILES ---------- */
-.tile{
-  width:100%;
-  aspect-ratio:var(--ratio);
-  height:clamp(var(--tile-min), 28vw, var(--tile-max));
-  min-height:var(--tile-min);
-  max-height:var(--tile-max);
-  display:grid;
-  margin:0;
-}
-.tile--image{ overflow:hidden; aspect-ratio:var(--ratio); }
-.tile--image img{ width:100%; height:100%; object-fit:cover; object-position:center; }
-
-.tile--text{ background:#000; color:#fff; position:relative; }
-.tile__content{
-  height:100%; padding:var(--tile-pad);
-  display:grid; align-content:center; gap:clamp(8px,1.4vw,14px);
-  width:min(92%, 680px);           /* la línea no toca bordes */
-}
-.tile__divider{ height:2px; width:var(--line-w); background:#fff; opacity:.9; }
-.tile__meta{ margin:0; color:#e6e6e6; font-size:clamp(13px,1.6vw,18px); }
-.tile--text h3{ margin:0; font-weight:800; font-size:clamp(20px,3.2vw,36px); line-height:1.1; }
-
-/* ---------- MOBILE/TABLET ---------- */
-@media (max-width: 900px){
-  .info{
-    padding-left:clamp(20px,6vw,28px);
-    padding-right:clamp(20px,6vw,28px);
-    overflow-x:clip;
-  }
-
-  /* pareja texto+imagen apilada y sin rendijas */
-  .info__row{ grid-template-columns:1fr; gap:0; overflow-x:clip; }
-  .info__row .tile--text{ order:1; }
-  .info__row .tile--image{ order:2; }
-  .info__row .tile{ height:clamp(210px,56vw,320px); max-height:none; overflow-x:clip; margin:0; }
-
-  /* separación uniforme entre filas */
-  .info__row + .info__row{ margin-top:clamp(20px,5vw,32px); }
-
-  .tile__content{ margin:0 auto; width:min(94%,700px); text-align:left; }
-  .tile__divider{ width:92%; }
-}
-
-/* ---------- DESKTOP (>=901px) ---------- */
-@media (min-width: 901px){
-  .info{ padding-left:clamp(24px,4vw,56px); padding-right:clamp(24px,4vw,56px); }
-
-  /* si quieres aire entre imagen y panel, cambia a: clamp(16px, 2.2vw, 28px) */
-  .info__row{ column-gap:0; }
-
-  /* alineaciones específicas */
-  .tile--text.left-desktop  .tile__content{ margin-left:0;  margin-right:auto; text-align:left; }
-  .tile--text.right-desktop .tile__content{ margin-right:0; margin-left:auto;  text-align:right; }
-  .tile--text.left-desktop  .tile__divider{ margin-right:auto; }
-  .tile--text.right-desktop .tile__divider{ margin-left:auto; }
-}
-
-
-
-
-
-/* Zona de párrafo e imagen */
-
-/* ====== About / ¿Qué es Animayo? ====== */
-:root{
-  --about-max: 1200px;
-  --about-pad: clamp(16px, 5vw, 28px);
-}
-
-.about{
-  width: 100%;
-  max-width: var(--about-max);
-  margin-inline: auto;
-  padding-inline: var(--about-pad);
-  margin-block: clamp(32px, 6vw, 64px);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-  color: #111;
-}
-
-.about__wrap{
-  display: grid;
-  grid-template-columns: 1.05fr 1fr; /* texto un pelín más ancho */
-  gap: clamp(20px, 4vw, 40px);
-  align-items: start;
-}
-
-.about__text h2{
-  margin: 0 0 .5rem 0;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  font-size: clamp(28px, 5vw, 56px);
-  line-height: 1.05;
-}
-
-.about__text p{
-  margin: 0 0 1rem 0;
-  font-size: clamp(15px, 2.1vw, 19px);
-  line-height: 1.45;
-  max-width: 62ch;
-}
-
-.about__media{
-  margin: 0;
-  width: 100%;
-  aspect-ratio: 16/10;        /* parecido a tu referencia; se adapta */
-  overflow: hidden;
-  border-radius: 6px;         /* quítalo si no quieres radio */
-}
-.about__media img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;    /* mueve el foco si lo necesitas */
-}
-
-/* ------ Responsive ------ */
-@media (max-width: 900px){
-  .about__wrap{
-    grid-template-columns: 1fr;
-    gap: clamp(16px, 4vw, 24px);
-  }
-  .about{
-    padding-inline: clamp(20px, 6vw, 28px);
-  }
-  .about__text p{ max-width: 68ch; }
-  .about__media{ aspect-ratio: 16/10; } /* mantiene proporción en móvil */
-}
-
-
-
-
-
-
-
-/* zona carteles que se desplazan */
-
-
-/* ====== FESTIVALES ANTERIORES ====== */
-:root{
-  --pf-max: 1200px;
-  --pf-pad: clamp(8px, 3vw, 16px);            /* padding lateral de la sección */
-  --poster-w: clamp(160px, 18vw, 260px);      /* ancho de cada cartel */
-  --poster-r: 16px;                           /* borde redondeado */
-  --gap: clamp(12px, 2vw, 24px);              /* separación entre carteles */
-  --speed: 38s;                               /* velocidad del scroll */
-  --fade: clamp(24px, 6vw, 80px);             /* ancho del desvanecido lateral */
-}
-
-.past-fests{
-  width: 100%;
-  margin-block: clamp(32px, 6vw, 80px);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-  color: #111;
-}
-
-.past-fests__inner{
-  max-width: var(--pf-max);
-  margin-inline: auto;
-  padding-inline: var(--pf-pad);
-}
-
-.past-fests h2{
-  text-align: center;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  font-size: clamp(28px, 5vw, 56px);
-  margin: 0 0 clamp(18px, 3.5vw, 28px);
-}
-
-/* --- Cinta --- */
-.marquee{
-  position: relative;
-  overflow: hidden;
-
-  /* acercamos la cinta a los bordes comiéndonos el padding del contenedor */
-  margin-inline: calc(-1 * var(--pf-pad));
-
-  /* desvanecido lateral a izquierda y derecha */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent var(--fade),
-    #000 calc(var(--fade) + 1px),
-    #000 calc(100% - var(--fade) - 1px),
-    transparent 100%
-  );
-          mask-image: linear-gradient(
-    to right,
-    transparent var(--fade),
-    #000 calc(var(--fade) + 1px),
-    #000 calc(100% - var(--fade) - 1px),
-    transparent 100%
-  );
-}
-
-.marquee__track{
-  display: flex;
-  gap: var(--gap);
-  width: max-content;
-  padding-block: clamp(6px, 1vw, 10px);
-  animation: marquee var(--speed) linear infinite;
+/* Header con transición suave al ocultar/mostrar */
+.site-header{
+  transition: transform .26s ease, box-shadow .26s ease;
   will-change: transform;
 }
 
-/* Pausa al pasar el ratón */
-.marquee:hover .marquee__track{ animation-play-state: paused; }
-
-/* Carteles */
-.poster{
-  flex: 0 0 auto;
-  width: var(--poster-w);
-  aspect-ratio: 3 / 4;          /* ajusta si tus pósters tienen otra proporción */
-  border-radius: var(--poster-r);
-  overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,.15);
-}
-.poster img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+/* ocultar hacia arriba al hacer scroll down */
+.site-header.hide-on-scroll{
+  transform: translateY(-100%);
 }
 
-/* Animación infinita (duplica la lista para bucle perfecto) */
-@keyframes marquee{
-  from { transform: translate3d(0,0,0); }
-  to   { transform: translate3d(-50%,0,0); }
+/* volver a aparecer al hacer scroll up */
+.site-header.show-on-scroll{
+  transform: translateY(0);
 }
 
-/* Accesibilidad: reducir movimiento si el usuario lo pide */
-@media (prefers-reduced-motion: reduce){
-  .marquee__track{ animation: none; }
+/* sombrita sutil cuando está fijo y has scrolleado un poco (opcional) */
+body:not(.no-scroll) .site-header.show-on-scroll{
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
 }
 
-/* --- Responsive móvil: full-bleed de borde a borde --- */
+
+
+
+/* ====== BOTÓN HAMBURGUESA (sin caja) ====== */
+.burger{
+  display:none;            /* visible solo en móvil (ver media query) */
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 120;            /* por ENCIMA del overlay del menú */
+}
+
+.burger .line{
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: #000;
+  transition: transform .28s ease, opacity .2s ease;
+}
+
+.burger .line-1{ top: 12px; }
+.burger .line-2{ top: 19px; }
+.burger .line-3{ top: 26px; }
+
+/* animación a “X” */
+.burger.is-open .line-1{ transform: translateY(7px) rotate(45deg); }
+.burger.is-open .line-2{ opacity: 0; }
+.burger.is-open .line-3{ transform: translateY(-7px) rotate(-45deg); }
+
+/* ====== NAV MÓVIL (overlay) ====== */
 @media (max-width: 900px){
-  .past-fests__inner{ padding-inline: 0; }
-  .marquee{ margin-inline: 0; } /* cinta ocupa todo el ancho */
-}
+  .burger{ display: inline-block; }
 
-
-/* ===== Desktop: cinta a TODO el ancho del viewport + fade bilateral ===== */
-@media (min-width: 901px){
-  .past-fests .marquee{
-    /* full-bleed real, ignorando paddings y max-width del contenedor */
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-
-    /* desvanecido en ambos laterales */
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent var(--fade),
-      #000 calc(var(--fade) + 1px),
-      #000 calc(100% - var(--fade) - 1px),
-      transparent 100%
-    );
-            mask-image: linear-gradient(
-      to right,
-      transparent var(--fade),
-      #000 calc(var(--fade) + 1px),
-      #000 calc(100% - var(--fade) - 1px),
-      transparent 100%
-    );
+  .main-nav{
+    position: fixed;
+    inset: 0;                         /* top/right/bottom/left: 0 */
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Slide desde arriba */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .35s ease, opacity .35s ease;
+    z-index: 110;                     /* debajo de la burger, encima del resto */
+    min-height: 100vh;                /* ocupa toda la altura */
   }
-}
 
-/* ===== Mobile/tablet: full-bleed simple (borde a borde) ===== */
-@media (max-width: 900px){
-  .past-fests__inner{ padding-inline: 0; }
-  .past-fests .marquee{
+  /* Si tienes .container dentro del nav, asegúrate que no recorta */
+  .main-nav > .container{
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    max-width: 900px;                 /* evita que el texto vaya de borde a borde */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: clamp(24px, 6vw, 40px);
   }
+
+  /* Cuando se abre */
+  .main-nav.menu-open{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Lista centrada y scrollable si no cabe */
+  .menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-height: 80vh;                 /* por si hay muchas opciones */
+    overflow: auto;                   /* permite desplazarse dentro del overlay */
+    text-align: center;
+  }
+
+  .menu a{
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-weight: 800;
+    font-size: clamp(22px, 6vw, 32px);
+    line-height: 1.2;
+  }
+}
+
+/* Evita que el body se mueva con el menú abierto (tu JS ya añade .no-scroll) */
+.no-scroll{ overflow: hidden; }
+
+/* Header siempre por encima del contenido normal */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 200;   /* más alto que el nav (110) para que la burger quede arriba */
+}
+
+/* Ocultar/mostrar header en scroll (tu JS añade estas clases) */
+.site-header.hide-on-scroll{
+  transform: translateY(-100%);
+  transition: transform .28s ease;
+}
+.site-header.show-on-scroll{
+  transform: translateY(0);
+  transition: transform .28s ease;
+}
+
+
+
+
+/* Asegura altura completa para el lock */
+html, body { height: 100%; }
+
+/* Overlay del menú: fondo translúcido con blur */
+@media (max-width: 900px){
+  .main-nav{
+    /* ya tienes fixed + inset:0 */
+    background: rgba(255,255,255,.55);       /* translúcido */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+    /* evita “arrastrar” el scroll de la página al hacer overscroll */
+    overscroll-behavior: contain;
+  }
+
+  /* Contenido del overlay puede hacer scroll si hiciera falta,
+     pero no se “asoma” nada de detrás */
+  .main-nav > .container{
+    max-height: 100vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Lock real del body mientras el menú está abierto */
+.no-scroll{
+  position: fixed;     /* inmoviliza la página */
+  width: 100%;
+  overflow: hidden;
 }
