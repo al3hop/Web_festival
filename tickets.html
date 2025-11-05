@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comprar entradas — ANIMAYO</title>
+
+  <!-- Tu CSS global -->
+  <link rel="stylesheet" href="CSS/style.css" />
+  <!-- CSS específico de esta pantalla -->
+  <link rel="stylesheet" href="CSS/entradas.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAV (el mismo que ya tienes) -->
+  <header class="site-header">
+    <div class="container header-top">
+      <a class="logo" href="index.html" aria-label="Ir a inicio">
+        <img src="media/img/logo_animayo.svg" alt="Animayo">
+      </a>
+
+      <div class="header-actions">
+        <a href="#newsletter" class="link-newsletter">
+          Newsletter
+          <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </a>
+
+        <!-- IMPORTANTE: aquí apuntamos a esta página -->
+        <a href="tickets.html" class="btn-tickets" data-nav="tickets">Tickets</a>
+
+        <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <nav id="main-menu" class="main-nav" aria-label="Principal">
+      <div class="container">
+        <ul class="menu">
+          <li><a href="index.html#animayo-2026">Animayo 2026</a></li>
+          <li><a href="index.html#informacion">Información</a></li>
+          <li><a href="index.html#que-es">¿Qué es Animayo?</a></li>
+          <li><a href="index.html#anteriores">Festivales Anteriores</a></li>
+          <li><a href="tickets.html" data-nav="tickets">Tickets</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO TICKETS -->
+  <main class="tickets">
+    <div class="container tickets__wrap">
+
+      <!-- Col izquierda: productos -->
+      <section class="tickets__catalogo" aria-labelledby="tix-title">
+        <h1 id="tix-title">Elige tu tipo de entrada</h1>
+
+        <ul class="tix-grid" id="tix-grid">
+          <!-- Cada <li> representa un abono -->
+          <li class="tix-card" data-id="basic35" data-name="Abono básico" data-price="35">
+            <h3 class="tix-card__title">Abono básico</h3>
+            <button class="tix-card__info" data-modal="basic35">Ver información</button>
+            <p class="tix-card__price"><strong>35€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+
+          <li class="tix-card" data-id="basic50" data-name="Abono básico +" data-price="50">
+            <h3 class="tix-card__title">Abono básico</h3>
+            <button class="tix-card__info" data-modal="basic50">Ver información</button>
+            <p class="tix-card__price"><strong>50€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+
+          <li class="tix-card" data-id="screen100" data-name="Abono proyecciones" data-price="100">
+            <h3 class="tix-card__title">Abono proyecciones</h3>
+            <button class="tix-card__info" data-modal="screen100">Ver información</button>
+            <p class="tix-card__price"><strong>100€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+
+          <li class="tix-card" data-id="network150" data-name="Abono networking" data-price="150">
+            <h3 class="tix-card__title">Abono networking</h3>
+            <button class="tix-card__info" data-modal="network150">Ver información</button>
+            <p class="tix-card__price"><strong>150€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+
+          <li class="tix-card" data-id="recruit200" data-name="Abono reclutamiento" data-price="200">
+            <h3 class="tix-card__title">Abono reclutamiento</h3>
+            <button class="tix-card__info" data-modal="recruit200">Ver información</button>
+            <p class="tix-card__price"><strong>200€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+
+          <li class="tix-card" data-id="vip300" data-name="Abono VIP" data-price="300">
+            <h3 class="tix-card__title">Abono VIP</h3>
+            <button class="tix-card__info" data-modal="vip300">Ver información</button>
+            <p class="tix-card__price"><strong>300€</strong></p>
+
+            <div class="tix-qty" aria-label="Cantidad">
+              <button class="qty-btn minus" aria-label="Quitar una entrada">−</button>
+              <span class="qty-num" aria-live="polite">0</span>
+              <button class="qty-btn plus" aria-label="Añadir una entrada">+</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Col derecha: resumen (sticky) -->
+      <aside class="tix-summary" aria-labelledby="resume-title">
+        <div class="tix-summary__box">
+          <h2 id="resume-title">Resumen</h2>
+
+          <ul class="tix-summary__list" id="summary-list">
+            <!-- Se rellena por JS -->
+          </ul>
+
+          <div class="tix-summary__total">
+            <span>Total</span>
+            <strong id="summary-total">0€</strong>
+          </div>
+
+          <button class="tix-summary__cta" id="btn-continue" type="button">
+            Continuar
+          </button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER (tu footer actual) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <a class="footer-logo" href="/" aria-label="Inicio Animayo">
+          <img src="media/img/logo_animayo_blanco.svg" alt="ANIMAYO" />
+        </a>
+        <nav class="footer-social" aria-label="Redes sociales">
+          <a class="social-btn" href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.06 5.66 21.2 10.44 22v-7.04H7.9v-2.9h2.54V9.85c0-2.5 1.5-3.88 3.78-3.88 1.1 0 2.25.2 2.25.2v2.5h-1.27c-1.25 0-1.63.78-1.63 1.58v1.9h2.78l-.45 2.9h-2.33V22C18.34 21.2 22 17.06 22 12.06z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.36 2H21l-6.48 7.41L22 22h-5.76l-4.5-6.18L6.4 22H3.75l7-8.01L2.5 2h5.85l4.07 5.65L18.36 2Zm-1.01 18.4h1.27L8.78 3.6H7.51l9.84 16.8Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3h2.4a5.9 5.9 0 0 0 3.36 3.38v2.34A8.07 8.07 0 0 1 16.9 7.8v6.7a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6.02.9.07v2.5c-.3-.08-.6-.12-.9-.12a4 4 0 1 0 4 4V3Z"/></svg>
+          </a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-contact">
+          C. de Montalbán, 12, Retiro, 28014 Madrid |
+          <a href="mailto:info@deco.es">info@deco.es</a> |
+          <a href="tel:+34608317746">+34 608 317 746</a><br>
+          © Algunos derechos reservados. Animayo Eventos y Festivales, 2025
+        </p>
+
+        <ul class="footer-legal">
+          <li><a href="#">Aviso legal</a></li>
+          <li><a href="#">Protección de datos</a></li>
+          <li><a href="#">Política de cookies</a></li>
+          <li><a href="#">Accesibilidad</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Overlay + Modal genérico (se rellena por JS) -->
+  <div class="tix-modal" id="tix-modal" aria-hidden="true">
+    <div class="tix-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="tix-modal__close" type="button" aria-label="Cerrar">×</button>
+      <h3 id="modal-title">Título</h3>
+      <div class="tix-modal__content">
+        <!-- contenido dinámico -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JS global (tu archivo actual) -->
+  <script src="JS/script.js" defer></script>
+  <!-- JS específico de esta pantalla -->
+  <script src="JS/entradas.js" defer></script>
+</body>
+</html>
