@@ -4,277 +4,228 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ANIMAYO — Festival Internacional de Animación</title>
+
   <meta name="description" content="Festival internacional de cine de animación, VFX y videojuegos. Fechas, sedes, programa, inscripción y venta de entradas." />
-  <link rel="preload" href="/assets/fonts/YourFont-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="CSS/style.css" />
 </head>
 
-<body id="top">
 
-  <!-- HEADER / NAV -->
-  <header class="site-header">
-    <div class="container header-top">
+<body>
+  <body id="top"></body>
+  <span id="top" class="skip-anchor" aria-hidden="true"></span>
+  <!-- HEADER aquí... -->
 
-      <!-- Logo -->
-      <a class="logo" href="#top" aria-label="Ir al inicio">
-        <img src="media/img/logo_animayo.svg" alt="Animayo">
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container header-top">
+
+    <!-- Logo -->
+    <a class="logo" href="#top">
+      <img src="media/img/logo_animayo.svg" alt="Animayo">
+    </a>
+
+    <!-- Right actions -->
+    <div class="header-actions">
+      <a href="#newsletter" class="link-newsletter">
+        Newsletter
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
       </a>
 
-      <!-- Acciones derecha -->
-      <div class="header-actions">
-        <a href="#newsletter" class="link-newsletter">
-          Newsletter
-          <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </a>
-        <a href="#tickets" class="btn-tickets">Tickets</a>
+      <a href="#tickets" class="btn-tickets">Tickets</a>
 
-        <!-- Hamburguesa (móvil) -->
-        <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú">
-          <span class="line line-1"></span>
-          <span class="line line-2"></span>
-          <span class="line line-3"></span>
-        </button>
-      </div>
+      <!-- Burger -->
+      <button class="burger" aria-controls="main-menu" aria-expanded="false">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="main-menu" class="main-nav">
+    <div class="container">
+      <ul class="menu">
+        <li><a href="#animayo-2026">Animayo 2026</a></li>
+        <li><a href="#informacion">Información</a></li>
+        <li><a href="#que-es">¿Qué es Animayo?</a></li>
+        <li><a href="#anteriores">Festivales Anteriores</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+<!-- ========== HERO VIDEO ========== -->
+<section class="hero-video">
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="media/video/Animayo_vídeo_banner.webm" type="video/mp4">
+  </video>
+</section>
+
+
+<!-- ========== SECCIÓN ENTRADAS ========== -->
+<section id="animayo-2026" class="section-entradas">
+  <div class="container">
+
+    <div class="marca-ano">
+      <svg class="svg-animayo-2026" viewBox="0 0 600 120">
+        <text x="50%" y="55" text-anchor="middle" font-size="64" font-weight="900">ANIMAYO</text>
+        <text x="50%" y="105" text-anchor="middle" font-size="40" font-weight="900">2026</text>
+      </svg>
     </div>
 
-    <!-- Navegación principal -->
-    <nav id="main-menu" class="main-nav" aria-label="Principal">
-      <div class="container">
-        <ul class="menu">
-          <li><a href="#animayo-2026">Animayo 2026</a></li>
-          <li><a href="#informacion">Información</a></li>
-          <li><a href="#que-es">¿Qué es Animayo?</a></li>
-          <li><a href="#anteriores">Festivales Anteriores</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+    <div class="entradas-grid">
 
-  <main>
-    <!-- HERO VIDEO -->
-    <section class="hero-video" aria-label="Video destacado">
-      <video autoplay muted loop playsinline class="video-bg">
-        <source src="media/video/Animayo_vídeo_banner.webm" type="video/webm">
-        Tu navegador no soporta video HTML5.
-      </video>
-    </section>
-
-    <!-- SECCIÓN: Compra tu entrada -->
-    <section id="animayo-2026" class="section-entradas" aria-labelledby="entradas-title">
-      <div class="container">
-
-        <!-- Logo superior con 2026 (mismo SVG) -->
-        <div class="marca-ano" aria-hidden="true">
-          <svg class="svg-animayo-2026" viewBox="0 0 600 120" role="img" aria-label="Animayo 2026">
-            <text x="50%" y="55" text-anchor="middle" font-size="64" font-weight="900" font-family="inherit" fill="#000">
-              ANIMAYO
-            </text>
-            <text x="50%" y="105" text-anchor="middle" font-size="40" font-weight="900" font-family="inherit" fill="#000">
-              2026
-            </text>
-          </svg>
-        </div>
-
-        <!-- Grid 2 columnas -->
-        <div class="entradas-grid">
-          <!-- Columna texto -->
-          <article class="entradas-card">
-            <h2 id="entradas-title">COMPRA TU ENTRADA</h2>
-            <p>
-              Adquiere tus pases y súmate a un recorrido que celebra la animación,
-              la innovación y el talento. Descubre proyecciones, charlas y talleres
-              con profesionales de primer nivel.
-            </p>
-
-            <h3>Horarios</h3>
-            <ul class="horarios">
-              <li><strong>Lunes a Viernes:</strong> 10:00 a 18:00</li>
-              <li><strong>Sábados:</strong> 10:00 a 18:00</li>
-              <li><strong>Domingos y festivos:</strong> 10:00 a 15:00</li>
-            </ul>
-
-            <a href="#tickets" class="btn-cta-entradas">Comprar entrada</a>
-
-            <p class="nota">
-              *Se aplican descuentos para estudiantes y mayores de 65 años.
-            </p>
-          </article>
-
-          <!-- Columna imagen -->
-          <figure class="entradas-media">
-            <img src="media/img/tetete.png" alt="Presentación de Animayo en rueda de prensa">
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- zona de bloques -->
-    <section id="informacion" class="info" aria-labelledby="info-title">
-      <!-- Cabecera -->
-      <div class="info__header">
-        <h2 id="info-title">Información</h2>
-        <div class="info__rule"></div>
-      </div>
-
-      <!-- FILA 1: imagen | texto (izquierda en desktop) -->
-      <div class="info__row">
-        <figure class="tile tile--image">
-          <img src="media/img/imagen-personas-invitadas.webp" alt="Backstage del festival">
-        </figure>
-        <article class="tile tile--text left-desktop">
-          <div class="tile__content">
-            <h3>Personas invitadas</h3>
-            <div class="tile__divider"></div>
-            <p class="tile__meta">Evento actual</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- FILA 2: texto (derecha en desktop) | imagen -->
-      <div class="info__row">
-        <article class="tile tile--text right-desktop">
-          <div class="tile__content">
-            <h3>Entradas al festival</h3>
-            <div class="tile__divider"></div>
-            <p class="tile__meta">Evento actual</p>
-          </div>
-        </article>
-        <figure class="tile tile--image">
-          <img src="media/img/imagen-entradas-festival.webp" alt="Proyección en sala">
-        </figure>
-      </div>
-
-      <!-- FILA 3: imagen | texto (izquierda en desktop) -->
-      <div class="info__row">
-        <figure class="tile tile--image">
-          <img src="media/img/imagen-informacion-extra.webp" alt="Ponente del evento">
-        </figure>
-        <article class="tile tile--text left-desktop">
-          <div class="tile__content">
-            <h3>Información extra</h3>
-            <div class="tile__divider"></div>
-            <p class="tile__meta">Evento actual</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Zona de párrafo e imagen -->
-    <section id="que-es" class="about" aria-labelledby="about-title">
-      <div class="about__wrap">
-        <div class="about__text">
-          <h2 id="about-title">¿Qué es Animayo?</h2>
-
-          <p>
-            Animayo es un festival internacional dedicado a la animación, los
-            efectos visuales y el videojuego, nacido en Gran Canaria. Reúne cada
-            año a profesionales, estudios, escuelas y público para celebrar el
-            talento y la industria con proyecciones, encuentros y actividades
-            formativas.
-          </p>
-
-          <p>
-            El programa combina masterclasses, talleres, revisiones de porfolio,
-            mesas redondas y sesiones de recruiting, además de competiciones
-            oficiales y programación para centros educativos. Es un punto de
-            encuentro que impulsa nuevas oportunidades para estudiantes y
-            profesionales, y acerca al público a los procesos creativos detrás de
-            las obras.
-          </p>
-        </div>
-
-        <figure class="about__media">
-          <img src="media/img/tetete.png" alt="Cartel y exposición del festival Animayo">
-        </figure>
-      </div>
-    </section>
-
-    <!-- zona carteles que se desplazan -->
-    <section id="anteriores" class="past-fests" aria-labelledby="past-fests-title">
-      <div class="past-fests__inner">
-        <h2 id="past-fests-title">Festivales anteriores</h2>
-
-        <div class="marquee" aria-label="Carteles de años anteriores">
-          <ul class="marquee__track">
-            <!-- Pase 1 -->
-            <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg" alt="Animayo 2019"></li>
-            <li class="poster"><img src="img/poster-2020.jpg" alt="Animayo 2020"></li>
-            <li class="poster"><img src="img/poster-2021.jpg" alt="Animayo 2021"></li>
-            <li class="poster"><img src="img/poster-2022.jpg" alt="Animayo 2022"></li>
-            <li class="poster"><img src="img/poster-2023.jpg" alt="Animayo 2023"></li>
-            <li class="poster"><img src="img/poster-2024.jpg" alt="Animayo 2024"></li>
-            <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg" alt="Animayo 2025"></li>
-
-            <!-- Pase 2 (duplicado para bucle perfecto) -->
-            <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg" alt="Animayo 2019 duplicado"></li>
-            <li class="poster"><img src="img/poster-2020.jpg" alt="Animayo 2020 duplicado"></li>
-            <li class="poster"><img src="img/poster-2021.jpg" alt="Animayo 2021 duplicado"></li>
-            <li class="poster"><img src="img/poster-2022.jpg" alt="Animayo 2022 duplicado"></li>
-            <li class="poster"><img src="img/poster-2023.jpg" alt="Animayo 2023 duplicado"></li>
-            <li class="poster"><img src="img/poster-2024.jpg" alt="Animayo 2024 duplicado"></li>
-            <li class="poster"><img src="img/poster-2025.jpg" alt="Animayo 2025 duplicado"></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-      <!-- Banda superior -->
-      <div class="footer-top">
-        <a class="footer-logo" href="#top" aria-label="Inicio Animayo">
-          <img src="media/img/logo_animayo_blanco.svg" alt="ANIMAYO" />
-        </a>
-
-        <nav class="footer-social" aria-label="Redes sociales">
-          <a class="social-btn" href="#" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.06 5.66 21.2 10.44 22v-7.04H7.9v-2.9h2.54V9.85c0-2.5 1.5-3.88 3.78-3.88 1.1 0 2.25.2 2.25.2v2.5h-1.27c-1.25 0-1.63.78-1.63 1.58v1.9h2.78l-.45 2.9h-2.33V22C18.34 21.2 22 17.06 22 12.06z"/>
-            </svg>
-          </a>
-          <a class="social-btn" href="#" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M18.36 2H21l-6.48 7.41L22 22h-5.76l-4.5-6.18L6.4 22H3.75l7-8.01L2.5 2h5.85l4.07 5.65L18.36 2Zm-1.01 18.4h1.27L8.78 3.6H7.51l9.84 16.8Z"/>
-            </svg>
-          </a>
-          <a class="social-btn" href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5ZM18 6.25a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 18 6.25Z"/>
-            </svg>
-          </a>
-          <a class="social-btn" href="#" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M14.5 3h2.4a5.9 5.9 0 0 0 3.36 3.38v2.34A8.07 8.07 0 0 1 16.9 7.8v6.7a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6.02.9.07v2.5c-.3-.08-.6-.12-.9-.12a4 4 0 1 0 4 4V3Z"/>
-            </svg>
-          </a>
-        </nav>
-      </div>
-
-      <!-- Banda inferior -->
-      <div class="footer-bottom">
-        <p class="footer-contact">
-          C. de Montalbán, 12, Retiro, 28014 Madrid |
-          <a href="mailto:info@deco.es">info@deco.es</a> |
-          <a href="tel:+34608317746">+34 608 317 746</a><br>
-          © Algunos derechos reservados. Animayo Eventos y Festivales, 2025
+      <article class="entradas-card">
+        <h2>COMPRA TU ENTRADA</h2>
+        <p>
+          Adquiere tus pases y súmate a un recorrido que celebra la animación,
+          la innovación y el talento. Descubre proyecciones, charlas y talleres.
         </p>
 
-        <ul class="footer-legal">
-          <li><a href="#">Aviso legal</a></li>
-          <li><a href="#">Protección de datos</a></li>
-          <li><a href="#">Política de cookies</a></li>
-          <li><a href="#">Accesibilidad</a></li>
+        <h3>Horarios</h3>
+        <ul class="horarios">
+          <li><strong>Lunes a Viernes:</strong> 10:00 - 18:00</li>
+          <li><strong>Sábados:</strong> 10:00 - 18:00</li>
+          <li><strong>Domingos:</strong> 10:00 - 15:00</li>
         </ul>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Scripts -->
-  <script src="JS/app.js" defer></script>
-  <script src="JS/script.js" defer></script>
+        <a href="#tickets" class="btn-cta-entradas">Comprar entrada</a>
+        <p class="nota">*Descuentos para estudiantes y mayores de 65 años.</p>
+      </article>
+
+      <figure class="entradas-media">
+        <img src="media/img/tetete.png" alt="">
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== INFO BLOQUES ========== -->
+<section id="informacion" class="info">
+  <div class="info__header">
+    <h2>Información</h2>
+    <div class="info__rule"></div>
+  </div>
+
+  <div class="info__row">
+    <figure class="tile tile--image"><img src="media/img/imagen-personas-invitadas.webp"></figure>
+    <article class="tile tile--text left-desktop">
+      <div class="tile__content">
+        <h3>Personas invitadas</h3>
+        <div class="tile__divider"></div>
+        <p class="tile__meta">Evento actual</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="info__row">
+    <article class="tile tile--text right-desktop">
+      <div class="tile__content">
+        <h3>Entradas al festival</h3>
+        <div class="tile__divider"></div>
+        <p class="tile__meta">Evento actual</p>
+      </div>
+    </article>
+    <figure class="tile tile--image"><img src="media/img/imagen-entradas-festival.webp"></figure>
+  </div>
+
+  <div class="info__row">
+    <figure class="tile tile--image"><img src="media/img/imagen-informacion-extra.webp"></figure>
+    <article class="tile tile--text left-desktop">
+      <div class="tile__content">
+        <h3>Información extra</h3>
+        <div class="tile__divider"></div>
+        <p class="tile__meta">Evento actual</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+<!-- ========== ABOUT ========== -->
+<section id="que-es" class="about">
+  <div class="about__wrap">
+    <div class="about__text">
+      <h2>¿Qué es Animayo?</h2>
+      <p>Animayo es un festival internacional... (tu texto completo aquí)</p>
+      <p>Masterclasses, talleres, recruiting... (tu texto completo aquí)</p>
+    </div>
+    <figure class="about__media"><img src="media/img/tetete.png"></figure>
+  </div>
+</section>
+
+
+<!-- ========== FESTIVALES ANTERIORES ========== -->
+<section id="anteriores" class="past-fests">
+  <div class="past-fests__inner">
+    <h2>Festivales anteriores</h2>
+
+    <div class="marquee">
+      <ul class="marquee__track">
+        <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg"></li>
+        <li class="poster"><img src="img/poster-2020.jpg"></li>
+        <li class="poster"><img src="img/poster-2021.jpg"></li>
+        <li class="poster"><img src="img/poster-2022.jpg"></li>
+        <li class="poster"><img src="img/poster-2023.jpg"></li>
+        <li class="poster"><img src="img/poster-2024.jpg"></li>
+        <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg"></li>
+
+        <li class="poster"><img src="media/img/animayo-cartel-prueba.jpeg"></li>
+        <li class="poster"><img src="img/poster-2020.jpg"></li>
+        <li class="poster"><img src="img/poster-2021.jpg"></li>
+        <li class="poster"><img src="img/poster-2022.jpg"></li>
+        <li class="poster"><img src="img/poster-2023.jpg"></li>
+        <li class="poster"><img src="img/poster-2024.jpg"></li>
+        <li class="poster"><img src="img/poster-2025.jpg"></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+      <a class="footer-logo"><img src="media/img/logo_animayo_blanco.svg"></a>
+
+      <nav class="footer-social">
+        <a class="social-btn"><svg viewBox="0 0 24 24"><path d="M22 12.06..."/></svg></a>
+        <a class="social-btn"><svg viewBox="0 0 24 24"><path d="M18.36 2..."/></svg></a>
+        <a class="social-btn"><svg viewBox="0 0 24 24"><path d="M7 2..."/></svg></a>
+        <a class="social-btn"><svg viewBox="0 0 24 24"><path d="M14.5 3..."/></svg></a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-contact">
+        C. de Montalbán, Madrid | info@deco.es | +34 608 317 746<br>
+        © Algunos derechos reservados. Animayo 2025
+      </p>
+
+      <ul class="footer-legal">
+        <li><a href="#">Aviso legal</a></li>
+        <li><a href="#">Protección de datos</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">Accesibilidad</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+<!-- JS -->
+<script src="JS/script.js" defer></script>
+
 </body>
 </html>
