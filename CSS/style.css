@@ -882,3 +882,292 @@ html { scroll-behavior: smooth; }
 
 /* Si el header es sticky, evita que tape los anchors */
 :target { scroll-margin-top: 80px; } /* ajusta 80px a la altura real del header */
+
+
+
+
+
+
+/* ===== HERO VIDEO – ocupa más pantalla y recorta con cover ===== */
+.hero-video{
+  position: relative;
+  width: 100%;
+  height: 65vh;           /* móvil: ~2/3 de la pantalla */
+  min-height: 360px;      /* evita que quede ridículo en móviles pequeños */
+  max-height: 820px;      /* por si pantallas muy altas */
+  overflow: hidden;
+  background: #000;       /* por si tarda en cargar */
+}
+
+.hero-video .video-bg{
+  position: absolute;
+  inset: 0;               /* top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;      /* recorta y rellena */
+  object-position: center;
+}
+
+/* Tablet: un poco menos alto */
+@media (min-width: 768px){
+  .hero-video{ height: 55vh; min-height: 420px; }
+}
+
+/* Desktop: todavía visible pero menos invasivo */
+@media (min-width: 1024px){
+  .hero-video{ height: 45vh; min-height: 420px; }
+}
+
+
+/* Oculta la scrollbar pero deja el scroll funcionando */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+
+/* Ocultar scrollbars en toda la página, pero mantener el scroll */
+html, body {
+  -ms-overflow-style: none;  /* IE/Edge antiguo */
+  scrollbar-width: none;     /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;             /* Chrome/Safari */
+}
+
+
+
+
+
+/* ===== Festivales anteriores: full-bleed y fade en ambos lados ===== */
+
+/* Ajustes de sección */
+.past-fests{
+  --pf-pad: clamp(8px, 3vw, 16px);         /* separador interno opcional */
+  --fade: clamp(24px, 6vw, 80px);          /* ancho del desvanecido */
+}
+
+/* La cinta ocupa TODO el viewport y “muerde” el contenedor */
+.past-fests .marquee{
+  position: relative;
+  overflow: hidden;
+
+  /* Full-bleed real (ignora max-width del wrapper) */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* Desvanecido a izquierda y derecha */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    to right,
+    transparent var(--fade),
+    #000 calc(var(--fade) + 1px),
+    #000 calc(100% - var(--fade) - 1px),
+    transparent 100%
+  );
+}
+
+/* Track: deja un pequeño “acolchado” interno para que
+   la primera/última tarjeta no choquen con el fade */
+.past-fests .marquee__track{
+  display: flex;
+  gap: var(--poster-gap, clamp(12px, 2vw, 24px));
+  width: max-content;
+  padding-inline: var(--pf-pad);
+  will-change: transform;
+}
+
+/* En móvil basta con borde a borde */
+@media (max-width: 900px){
+  .past-fests .marquee{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+
+
+/* === Festivales anteriores – bordes al 100% + fade bilateral === */
+
+/* La cinta sigue siendo full-bleed */
+.past-fests .marquee{
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* El track sin padding para que los pósters lleguen al borde */
+.past-fests .marquee__track{
+  padding-inline: 0 !important;   /* <- clave para no dejar hueco a la derecha */
+  gap: var(--poster-gap, clamp(12px, 2vw, 24px));
+  width: max-content;
+  will-change: transform;
+}
+
+/* Overlays de desvanecido pegados a los bordes (independiente de masks) */
+.past-fests .marquee::before,
+.past-fests .marquee::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width: var(--fade, clamp(24px, 6vw, 80px));
+  pointer-events:none;
+  z-index: 2;                      /* por encima de los pósters */
+}
+
+/* Color del fondo de tu página; si usas otro, cámbialo aquí */
+.past-fests .marquee::before{
+  left:0;
+  background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
+}
+.past-fests .marquee::after{
+  right:0;
+  background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%);
+}
+
+/* En móvil no necesitamos full-bleed especial (opcional) */
+@media (max-width: 900px){
+  .past-fests .marquee{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+
+
+/* === FESTIVALES ANTERIORES: full-bleed real y fade en ambos lados === */
+
+/* 1) El contenedor interior no debe tener padding en esta sección */
+.past-fests__inner{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) La cinta ocupa el viewport completo y se alinea a los bordes */
+.past-fests .marquee{
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left:  calc(50% - 50vw);   /* pega a la izquierda */
+  margin-right: calc(50% - 50vw);   /* pega a la derecha */
+}
+
+/* 3) El track sin padding para que el primer póster llegue al borde */
+.past-fests .marquee__track{
+  padding-inline: 0 !important;
+  gap: var(--poster-gap, clamp(12px, 2vw, 24px));
+  width: max-content;
+}
+
+/* 4) Fades con overlays (independientes del mask) */
+.past-fests .marquee::before,
+.past-fests .marquee::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width: var(--fade, clamp(24px, 6vw, 80px));
+  pointer-events:none;
+  z-index: 2;
+}
+.past-fests .marquee::before{
+  left:0;
+  background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
+}
+.past-fests .marquee::after{
+  right:0;
+  background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%);
+}
+
+/* 5) En móvil puedes volver a 100% normal si quieres */
+@media (max-width: 900px){
+  .past-fests .marquee{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+
+
+
+/* === Festivales anteriores: full-bleed perfecto y fade bilateral === */
+
+/* Quita cualquier padding del wrapper interior */
+.past-fests__inner{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* La cinta ocupa el viewport real (sin contar scrollbar) */
+.past-fests .marquee{
+  position: relative;
+  overflow: hidden;
+
+  /* OJO: usamos 100dvw (o 100svw si prefieres) para evitar el “gap” por la barra */
+  width: 100dvw;
+  max-width: 100dvw;
+  margin-left:  calc(50% - 50dvw);
+  margin-right: calc(50% - 50dvw);
+}
+
+/* El track sin padding extra y sin margen inicial */
+.past-fests .marquee__track{
+  display: flex;
+  gap: var(--poster-gap, clamp(12px, 2vw, 24px));
+  width: max-content;
+  padding-inline: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Fades a izquierda y derecha por encima de los pósters */
+.past-fests .marquee::before,
+.past-fests .marquee::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width: var(--fade, clamp(24px, 6vw, 80px));
+  pointer-events:none;
+  z-index: 2;
+}
+.past-fests .marquee::before{
+  left:0;
+  background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
+}
+.past-fests .marquee::after{
+  right:0;
+  background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Si tu fondo no es blanco, sustituye #fff por tu color de fondo. */
+
+/* En móvil puedes volver a ancho normal si prefieres */
+@media (max-width: 900px){
+  .past-fests .marquee{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
