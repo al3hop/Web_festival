@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6) CTA continuar (demo)
   document.getElementById('btn-continue')?.addEventListener('click', () => {
     const total = totalEl?.textContent || '0€';
-    alert(`¡Genial! Tu total es ${total}. (Aquí iría el paso de datos/pago)`);
+    alert(`¡Genial! Tu total es ${total}.`);
   });
 
 });
