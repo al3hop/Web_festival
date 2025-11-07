@@ -578,3 +578,5 @@ body{
 /* Nota legal */
 .newsletter__small{ margin: clamp(12px,2.4vw,16px) 0 0; font-size:.9rem; opacity:.85; }
 .newsletter__small a{ color:#fff; text-decoration:underline; text-underline-offset:2px; }
+
+
