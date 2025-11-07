@@ -27,7 +27,7 @@
       <img src="media/img/logo_animayo.svg" alt="Animayo">
     </a>
 
-    <!-- Right actions -->
+    <!-- Right actions (desktop only) -->
     <div class="header-actions">
       <a href="#newsletter" class="link-newsletter">
         Newsletter
@@ -36,11 +36,9 @@
         </svg>
       </a>
 
-      
       <a href="tickets.html" class="btn-tickets">Tickets</a>
 
-
-      <!-- Burger -->
+      <!-- Burger (mobile) -->
       <button class="burger" aria-controls="main-menu" aria-expanded="false">
         <span class="line line-1"></span>
         <span class="line line-2"></span>
@@ -57,6 +55,21 @@
         <li><a href="#informacion">Información</a></li>
         <li><a href="#que-es">¿Qué es Animayo?</a></li>
         <li><a href="#anteriores">Festivales Anteriores</a></li>
+
+        <!-- ✅ SOLO MOBILE -->
+        <li class="only-mobile">
+          <a href="tickets.html" class="btn-tickets btn-tickets--full">Tickets</a>
+        </li>
+
+        <li class="only-mobile">
+          <a href="#newsletter" class="link-newsletter nav-newsletter">
+            Newsletter
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </a>
+        </li>
+        <!-- ✅ END SOLO MOBILE -->
       </ul>
     </div>
   </nav>
@@ -98,8 +111,8 @@
           <li><strong>Domingos:</strong> 10:00 - 15:00</li>
         </ul>
 
-        <a href="#tickets" class="btn-cta-entradas">Comprar entrada</a>
-        <p class="nota">*Descuentos para estudiantes y mayores de 65 años.</p>
+        <a href="tickets.html" class="btn-cta-entradas">Comprar entrada</a>
+
       </article>
 
       <figure class="entradas-media">
@@ -169,7 +182,8 @@
 <!-- ========== FESTIVALES ANTERIORES ========== -->
 <section id="anteriores" class="past-fests">
   <div class="past-fests__inner">
-    <h2>Festivales anteriores</h2>
+    <h2 class="section-title">Festivales anteriores</h2>
+
 
     <div class="marquee">
       <ul class="marquee__track">
@@ -192,6 +206,40 @@
     </div>
   </div>
 </section>
+
+
+<section id="newsletter" class="newsletter">
+  <div class="container">
+    <h2 class="section-title">Newsletter</h2>
+    <p class="newsletter__lead">
+      Apúntate para recibir fechas, estrenos, talleres y sorpresas de Animayo.
+    </p>
+
+    <form class="newsletter__form" novalidate>
+      <div class="field field--name">
+        <label for="nl-name">Nombre</label>
+        <input id="nl-name" type="text" name="name" placeholder="Tu nombre" />
+        <div class="field__error"></div>
+      </div>
+
+      <div class="field field--email">
+        <label for="nl-email">Correo electrónico *</label>
+        <input id="nl-email" type="email" name="email" placeholder="tu@email.com" required />
+        <div class="field__error"></div>
+      </div>
+
+      <div class="newsletter__cta">
+        <button type="submit" class="btn-newsletter">Suscribirme</button>
+      </div>
+    </form>
+
+    <p class="newsletter__small">
+      Al suscribirte aceptas nuestra <a href="#">política de privacidad</a>.
+    </p>
+  </div>
+</section>
+
+
 
 
 <!-- ========== FOOTER ========== -->
@@ -224,6 +272,55 @@
     </div>
   </div>
 </footer>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".newsletter__form");
+  const emailInput = document.querySelector("#nl-email");
+  const nameInput = document.querySelector("#nl-name");
+  const emailError = emailInput.parentElement.querySelector(".field__error");
+  const nameError = nameInput.parentElement.querySelector(".field__error");
+
+  form.addEventListener("submit", (e) => {
+    let valid = true;
+
+    // Reset mensajes
+    emailError.textContent = "";
+    nameError.textContent = "";
+    emailInput.classList.remove("is-invalid", "is-valid");
+    nameInput.classList.remove("is-invalid", "is-valid");
+
+    // Validación nombre (opcional pero recomendado)
+    if (nameInput.value.trim().length < 2) {
+      valid = false;
+      nameError.textContent = "Introduce tu nombre.";
+      nameInput.classList.add("is-invalid");
+    } else {
+      nameInput.classList.add("is-valid");
+    }
+
+    // Validación email
+    const emailValue = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailValue)) {
+      valid = false;
+      emailError.textContent = "Introduce un correo electrónico válido.";
+      emailInput.classList.add("is-invalid");
+    } else {
+      emailInput.classList.add("is-valid");
+    }
+
+    // Si hay algún error, frena el envío real del formulario
+    if (!valid) e.preventDefault();
+  });
+});
+</script>
+
+
+
 
 
 <!-- JS -->

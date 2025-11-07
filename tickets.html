@@ -12,43 +12,61 @@
 </head>
 <body>
 
-  <!-- HEADER / NAV (el mismo que ya tienes) -->
-  <header class="site-header">
-    <div class="container header-top">
-      <a class="logo" href="index.html" aria-label="Ir a inicio">
-        <img src="media/img/logo_animayo.svg" alt="Animayo">
+  <!-- ========== HEADER (tickets.html) ========== -->
+<header class="site-header">
+  <div class="container header-top">
+    <!-- Logo → siempre vuelve a la home -->
+    <a class="logo" href="index.html" aria-label="Ir a inicio">
+      <img src="media/img/logo_animayo.svg" alt="Animayo">
+    </a>
+
+    <!-- Acciones (solo desktop) -->
+    <div class="header-actions">
+      <a href="index.html#newsletter" class="link-newsletter">
+        Newsletter
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
       </a>
 
-      <div class="header-actions">
-        <a href="#newsletter" class="link-newsletter">
-          Newsletter
-          <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </a>
+      <a href="tickets.html" class="btn-tickets" data-nav="tickets">Tickets</a>
 
-        <!-- IMPORTANTE: aquí apuntamos a esta página -->
-        <a href="tickets.html" class="btn-tickets" data-nav="tickets">Tickets</a>
-
-        <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú">
-          <span class="line line-1"></span>
-          <span class="line line-2"></span>
-          <span class="line line-3"></span>
-        </button>
-      </div>
+      <!-- Burguer (móvil) -->
+      <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
     </div>
+  </div>
 
-    <nav id="main-menu" class="main-nav" aria-label="Principal">
-      <div class="container">
-        <ul class="menu">
-          <li><a href="index.html#animayo-2026">Animayo 2026</a></li>
-          <li><a href="index.html#informacion">Información</a></li>
-          <li><a href="index.html#que-es">¿Qué es Animayo?</a></li>
-          <li><a href="index.html#anteriores">Festivales Anteriores</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <!-- NAV -->
+  <nav id="main-menu" class="main-nav" aria-label="Principal">
+    <div class="container">
+      <ul class="menu">
+        <!-- Enlaces a secciones del INDEX -->
+        <li><a href="index.html#animayo-2026">Animayo 2026</a></li>
+        <li><a href="index.html#informacion">Información</a></li>
+        <li><a href="index.html#que-es">¿Qué es Animayo?</a></li>
+        <li><a href="index.html#anteriores">Festivales Anteriores</a></li>
+
+        <!-- SOLO EN MENÚ MÓVIL -->
+        <li class="only-mobile">
+          <a href="tickets.html" class="btn-tickets btn-tickets--full">Tickets</a>
+        </li>
+        <li class="only-mobile">
+          <a href="index.html#newsletter" class="link-newsletter nav-newsletter">
+            Newsletter
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </a>
+        </li>
+        <!-- /SOLO MÓVIL -->
+      </ul>
+    </div>
+  </nav>
+</header>
 
   <!-- CONTENIDO TICKETS -->
   <main class="tickets">
